@@ -95,8 +95,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Media\bg.jpg" />
     <Resource Include="Media\bitcoin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\neon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

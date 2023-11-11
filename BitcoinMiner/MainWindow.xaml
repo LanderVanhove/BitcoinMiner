@@ -6,34 +6,55 @@
         xmlns:local="clr-namespace:BitcoinMiner"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Bahnschrift" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="420"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="220"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
+        <Image x:Name="ImgBG"
+               Source="Media/bg.png" 
+               Stretch="Fill"
+               Grid.ColumnSpan="2"
+               Grid.RowSpan="3"
+            />
+        <Image Source="Media/neon.png" 
+               Stretch="Fill"
+               Width="600"
+               Margin="-70,0,0,0"
+               />
 
         <Image x:Name="ImgBTC" 
                Source="Media/bitcoin.png"
                Grid.Row="1"
-               Width="250"/>
-
-        <StackPanel>
-            <Label Name="LblNaam" Content="X's Bitcoin Emperium" Width="200"/>
+               Height="210"
+               Margin="30,0,0,0">
+            <!--<Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>-->
+        </Image>
+        <StackPanel Background="#0f127b" Margin="64,16,23,16">
+            <Label Name="LblNaam" Content="X's Bitcoin Emperium" 
+                   Width="200" Foreground="#00acd1" FontWeight="Bold" FontSize="18"/>
             <WrapPanel>
-                <Label Content="BTC: " Width="150"/>
-                <TextBox x:Name="TxtBTC" Text="-Aaantal BTC-" Width="150"/>
+                <Label Content="BTC: " Width="150" Foreground="#00acd1" FontSize="18"/>
+                <Label x:Name="LblBTC" Content="-Aaantal BTC-" Width="150" 
+                       Foreground="#00acd1" FontSize="18"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="BTC/s: " Width="150"/>
-                <TextBox x:Name="TxtBTCpersec" Text="-Aaantal BTC/s-" Width="150"/>
+                <Label Content="BTC/s: " Width="150" Foreground="#00acd1" FontSize="18"/>
+                <Label x:Name="LblBTCpersec" Content="-Aaantal BTC/s-" Width="150" 
+                       Foreground="#00acd1" FontSize="18"/>
             </WrapPanel>
-
-
         </StackPanel>
 
     </Grid>
