@@ -24,11 +24,13 @@ namespace BitcoinMiner
         {
             InitializeComponent();
         }
-
+        int aantalBTC = 0;
      
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ImgBTC.Height = 230;
+            aantalBTC++;
+            LblBTC.Content = aantalBTC.ToString();
         }
         private void ImgBTC_MouseUp(object sender, MouseButtonEventArgs e)
         {
