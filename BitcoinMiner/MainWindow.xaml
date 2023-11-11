@@ -35,9 +35,35 @@
                Source="Media/bitcoin.png"
                Grid.Row="1"
                Height="210"
-               Margin="30,0,0,0" MouseDown="ImgBTC_MouseDown" MouseUp="ImgBTC_MouseUp">
-
+               Margin="30,0,0,0" 
+               MouseDown="ImgBTC_MouseDown" 
+               MouseUp="ImgBTC_MouseUp" 
+               MouseLeave="ImgBTC_MouseLeave">
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="MouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" To="230" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" To="210" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" To="210" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
         </Image>
+        
         <StackPanel Background="#0f127b" Margin="64,16,23,16">
             <Label Name="LblNaam" Content="X's Bitcoin Emperium" 
                    Width="200" Foreground="#00acd1" FontWeight="Bold" FontSize="18"/>
