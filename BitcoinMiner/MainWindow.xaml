@@ -35,7 +35,7 @@
                Source="Media/bitcoin.png"
                Grid.Row="1"
                Height="210"
-               Margin="30,0,0,0">
+               Margin="30,0,0,0" MouseDown="ImgBTC_MouseDown" MouseUp="ImgBTC_MouseUp">
             <!--<Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>-->

@@ -24,5 +24,15 @@ namespace BitcoinMiner
         {
             InitializeComponent();
         }
+
+        private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ImgBTC_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
