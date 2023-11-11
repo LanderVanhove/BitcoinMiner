@@ -31,6 +31,7 @@ namespace BitcoinMiner
             ImgBTC.Height = 230;
             aantalBTC++;
             LblBTC.Content = aantalBTC.ToString();
+            this.Title = $"You have mined {aantalBTC} BTC so far!";
         }
         private void ImgBTC_MouseUp(object sender, MouseButtonEventArgs e)
         {
