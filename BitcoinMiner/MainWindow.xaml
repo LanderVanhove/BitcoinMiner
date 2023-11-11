@@ -7,11 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize">
     <Window.Resources>
+   
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontFamily" Value="Bahnschrift" />
         </Style>
     </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Media/bg.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="420"/>
             <ColumnDefinition/>
@@ -21,12 +25,6 @@
             <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Image x:Name="ImgBG"
-               Source="Media/bg.png" 
-               Stretch="Fill"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="3"
-            />
         <Image Source="Media/neon.png" 
                Stretch="Fill"
                Width="600"
