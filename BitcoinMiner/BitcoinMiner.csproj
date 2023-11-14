@@ -104,7 +104,10 @@
     <Resource Include="Media\neon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Media\worker.png" />
+    <Resource Include="Media\AdvancedMiner.png" />
+    <Resource Include="Media\basicMiner.png" />
+    <Resource Include="Media\miningRig.png" />
+    <Resource Include="Media\quantum.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

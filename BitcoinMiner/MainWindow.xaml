@@ -89,7 +89,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-                <Label Content="Shop"  
+            <Label Content="Shop"  
                        Foreground="#00acd1" 
                        FontWeight="Bold" 
                        FontSize="48"
@@ -98,128 +98,155 @@
                        VerticalAlignment="Center"
                        />
 
-                <Border
+            <Border
+                    Name="BorderBasic"
                     BorderBrush="#008dff"
-                    BorderThickness="2"
+                    BorderThickness="0"
                     Grid.Row="1"
                     >
-                <Grid>
+                <Grid 
+                    Name="GridBasic"
+                    Opacity="0.3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
 
-                            <Image 
-                                Source="Media/worker.png"
-                                Height="50"
+                    <Image 
+                                Source="Media/basicMiner.png"
                                 Grid.Column="0"/>
-                        <StackPanel 
+                    <StackPanel 
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                            <Label 
-                                Content="Investment 1" 
-                                Foreground="#00acd1" 
-                                FontSize="18"/>
-                            <Label 
-                                Content="Price Investment 1" 
-                                Foreground="#00acd1" 
-                                FontSize="18"/>
-                        </StackPanel>
                         <Label 
-                            Content="100" 
+                                Content="Basic Miner" 
+                                Foreground="#00acd1" 
+                                FontSize="26"/>
+                        <Label 
+                                Content="15 BTC" 
+                                Foreground="#00acd1" 
+                                FontSize="18"/>
+                    </StackPanel>
+                    <Label 
+                            Content="0" 
                             Foreground="#00acd1" 
                             FontSize="18" 
                             Grid.Column="2"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
-                    </Grid>
-                </Border>
+                </Grid>
+            </Border>
 
-                <Border
+            <Border
+                    Name="BorderAdvanced"
                     BorderBrush="#008dff"
-                    BorderThickness="2"
+                    BorderThickness="0"
                     Grid.Row="2">
-                    <Grid>
+                <Grid
+                    Name="GridAdvanced"
+                    Opacity="0.3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="Media/worker.png"
-                           Height="50"
+                    <Image Source="Media/advancedminer.png"
                            Grid.Column="0"/>
-                        <StackPanel 
+                    <StackPanel 
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                            <Label Content="Investment 1" Foreground="#00acd1" FontSize="18"/>
-                            <Label Content="Price Investment 1" Foreground="#00acd1" FontSize="18"/>
-                        </StackPanel>
                         <Label 
-                            Content="100" 
+                                Content="Advanced Miner" 
+                                Foreground="#00acd1" 
+                                FontSize="26"/>
+                        <Label 
+                                Content="100 BTC" 
+                                Foreground="#00acd1" 
+                                FontSize="18"/>
+                    </StackPanel>
+                    <Label 
+                            Content="0" 
                             Foreground="#00acd1" 
                             FontSize="18" 
                             Grid.Column="2"
                             VerticalAlignment="Center"
                             HorizontalContentAlignment="Center"/>
-                    </Grid>
-                </Border>
+                </Grid>
+            </Border>
 
-                <Border
+            <Border
+                    Name="BorderMiningRig"
                     BorderBrush="#008dff"
-                    BorderThickness="2"
+                    BorderThickness="0"
                     Grid.Row="3">
-                    <Grid>
+                <Grid
+                    Name="GridMiningRig"
+                    Opacity="0.3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="Media/worker.png"
-                           Height="50"
+                    <Image Source="Media/miningrig.png"
                            Grid.Column="0"/>
-                        <StackPanel 
+                    <StackPanel 
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                            <Label Content="Investment 1" Foreground="#00acd1" FontSize="18"/>
-                            <Label Content="Price Investment 1" Foreground="#00acd1" FontSize="18"/>
-                        </StackPanel>
-                        <Label Content="0" 
+                        <Label 
+                                Content="Complete Mining Rig" 
+                                Foreground="#00acd1" 
+                                FontSize="26"/>
+                        <Label 
+                                Content="1100 BTC" 
+                                Foreground="#00acd1" 
+                                FontSize="18"/>
+                    </StackPanel>
+                    <Label Content="0" 
                                Foreground="#00acd1" 
                                FontSize="18" 
                                Grid.Column="2"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
-                    </Grid>
-                </Border>
+                </Grid>
+            </Border>
 
-                <Border
+            <Border
+                    Name="BorderQuantum"
                     BorderBrush="#008dff"
-                    BorderThickness="2"
+                    BorderThickness="0"
                     Grid.Row="4">
-                    <Grid>
+                <Grid
+                    Name="GridQuantum"
+                    Opacity="0.3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="Media/worker.png"
-                           Height="50"
-                           Grid.Column="0"/>
-                        <StackPanel
+                    <Image Source="Media/quantum.png"
+                           Grid.Column="0" 
+                           />
+                    <StackPanel
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                            <Label Content="Investment 1" Foreground="#00acd1" FontSize="18"/>
-                            <Label Content="Price Investment 1" Foreground="#00acd1" FontSize="18"/>
-                        </StackPanel>
-                        <Label Content="0" 
+                        <Label 
+                                Content="Quantum miner" 
+                                Foreground="#00acd1" 
+                                FontSize="26"/>
+                        <Label 
+                                Content="12000 BTC" 
+                                Foreground="#00acd1" 
+                                FontSize="18"/>
+                    </StackPanel>
+                    <Label Content="0" 
                                Foreground="#00acd1" 
                                FontSize="18"
                                Grid.Column="2"
                                VerticalAlignment="Center"
                                HorizontalContentAlignment="Center"/>
-                    </Grid>
-                </Border>
+                </Grid>
+            </Border>
 
         </Grid>
     </Grid>
