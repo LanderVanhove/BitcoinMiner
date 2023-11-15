@@ -31,6 +31,7 @@ namespace BitcoinMiner
         double kostAdvanced = 100;
         double kostMiningRig = 1100;
         double kostQuantum = 12000;
+        
      
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -76,6 +77,39 @@ namespace BitcoinMiner
                 GridQuantum.IsEnabled = true;
                 BorderQuantum.BorderThickness = new Thickness(2);
             }
+        }
+
+        private void TooltipLoad()
+        {
+            ToolTip TTbasic = new ToolTip();
+            StringBuilder sbBasic = new StringBuilder();
+            sbBasic.AppendLine("Every basic miner will provide a passive income of 0.1 BTC every second");
+            TTbasic.Content = sbBasic.ToString();
+            GridBasic.ToolTip = TTbasic;
+
+            ToolTip TTadvanced = new ToolTip();
+            StringBuilder sbAdvanced = new StringBuilder();
+            sbAdvanced.AppendLine("Every Advanced miner will provide a passive income of 1 BTC every second");
+            TTadvanced.Content = sbAdvanced.ToString();
+            GridAdvanced.ToolTip = TTadvanced;
+
+            ToolTip TTminingRig = new ToolTip();
+            StringBuilder sbMiningRig = new StringBuilder();
+            sbMiningRig.AppendLine("Every Mining Rig will provide a passive income of 8 BTC every second");
+            TTminingRig.Content = sbMiningRig.ToString();
+            GridMiningRig.ToolTip = sbMiningRig;
+
+            ToolTip TTquantum = new ToolTip();
+            StringBuilder sbQuantum = new StringBuilder();
+            sbQuantum.AppendLine("Every Quantum miner will provide a passive income of 47 BTC every second");
+            TTquantum.Content = sbQuantum.ToString();
+            GridQuantum.ToolTip = sbQuantum;
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            TooltipLoad();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BitcoinMiner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize">
+        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontFamily" Value="Bahnschrift" />
@@ -194,7 +194,7 @@
                             Grid.Column="1"
                             VerticalAlignment="Center">
                         <Label 
-                                Content="Complete Mining Rig" 
+                                Content="Mining Rig" 
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
                         <Label 
