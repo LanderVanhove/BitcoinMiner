@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,9 @@ namespace BitcoinMiner
         {
             InitializeComponent();
         }
-        double aantalBTC = 11999;
+
+        double aantalBTC = 2000;
+
 
         double prijsBasic = 15;
         double prijsAdvanced = 100;
@@ -39,10 +42,18 @@ namespace BitcoinMiner
         double aantalMiningRig = 0;
         double aantalQuantum = 0;
 
+        double passiefBasic = 0;
+        double passiefAdvanced = 0;
+        double passiefMiningRig = 0;
+        double passiefQuantum = 0;
+        double passiefTotaal = 0;
 
 
         DispatcherTimer timer_ms = new DispatcherTimer();
-        
+
+        private Stopwatch stopwatch = new Stopwatch();
+        private double elapsedTimeInSeconds = 0;
+
 
         private void Timer_ms_Load()
         {
@@ -54,8 +65,22 @@ namespace BitcoinMiner
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
+
+            elapsedTimeInSeconds = stopwatch.ElapsedMilliseconds / 1000.0;
+            stopwatch.Restart();
+
+            //update totale passief BTC
+            passiefTotaal = passiefBasic + passiefAdvanced + passiefMiningRig + passiefQuantum;
+            LblBTCpersec.Content = passiefTotaal.ToString();
+
+            //update totale BTC adhv passief inkomen
+            aantalBTC += (passiefTotaal * elapsedTimeInSeconds);
+
+            //update totale BTC in shop en titel
             LblBTC.Content = $"{Math.Ceiling(aantalBTC)}";
             this.Title = $"You have mined {Math.Ceiling(aantalBTC)} BTC so far!";
+
+
         }
 
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
@@ -171,6 +196,8 @@ namespace BitcoinMiner
             aantalBasic++;
             TxtAantalBasic.Content = (int)aantalBasic;
             TxtprijsBasic.Content = $"{Math.Ceiling(prijsBasic)} BTC";
+
+            passiefBasic += 0.1;
         }
 
         private void GridAdvanced_MouseDown(object sender, MouseButtonEventArgs e)
@@ -180,6 +207,8 @@ namespace BitcoinMiner
             aantalAdvanced++;
             TxtAantalAdvanced.Content = (int)aantalAdvanced;
             TxtprijsAdvanced.Content = $"{Math.Ceiling(prijsAdvanced)} BTC";
+
+            passiefAdvanced += 1;
         }
 
         private void GridMiningRig_MouseDown(object sender, MouseButtonEventArgs e)
@@ -189,6 +218,8 @@ namespace BitcoinMiner
             aantalMiningRig++;
             TxtAantalMiningRig.Content = (int)aantalMiningRig;
             TxtprijsMiningRig.Content = $"{Math.Ceiling(prijsMiningRig)} BTC";
+
+            passiefMiningRig += 8;
         }
 
         private void GridQuantum_MouseDown(object sender, MouseButtonEventArgs e)
@@ -198,6 +229,8 @@ namespace BitcoinMiner
             aantalQuantum++;
             TxtAantalQuantum.Content = (int)aantalQuantum;
             TxtprijsQuantum.Content = $"{Math.Ceiling(prijsQuantum)} BTC";
+
+            passiefQuantum += 47;
         }
         #endregion
 
