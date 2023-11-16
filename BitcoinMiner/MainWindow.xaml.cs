@@ -54,8 +54,8 @@ namespace BitcoinMiner
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
-            LblBTC.Content = aantalBTC.ToString("N");
-            this.Title = $"You have mined {aantalBTC:f2} BTC so far!";
+            LblBTC.Content = $"{Math.Ceiling(aantalBTC)}";
+            this.Title = $"You have mined {Math.Ceiling(aantalBTC)} BTC so far!";
         }
 
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
@@ -170,7 +170,7 @@ namespace BitcoinMiner
             prijsBasic *= 1.15;
             aantalBasic++;
             TxtAantalBasic.Content = (int)aantalBasic;
-            TxtprijsBasic.Content = $"{prijsBasic:f2} BTC";
+            TxtprijsBasic.Content = $"{Math.Ceiling(prijsBasic)} BTC";
         }
 
         private void GridAdvanced_MouseDown(object sender, MouseButtonEventArgs e)
@@ -179,7 +179,7 @@ namespace BitcoinMiner
             prijsAdvanced *= 1.15;
             aantalAdvanced++;
             TxtAantalAdvanced.Content = (int)aantalAdvanced;
-            TxtprijsAdvanced.Content = $"{prijsAdvanced:f2} BTC";
+            TxtprijsAdvanced.Content = $"{Math.Ceiling(prijsAdvanced)} BTC";
         }
 
         private void GridMiningRig_MouseDown(object sender, MouseButtonEventArgs e)
@@ -188,7 +188,7 @@ namespace BitcoinMiner
             prijsMiningRig *= 1.15;
             aantalMiningRig++;
             TxtAantalMiningRig.Content = (int)aantalMiningRig;
-            TxtprijsMiningRig.Content = $"{prijsMiningRig:f2} BTC";
+            TxtprijsMiningRig.Content = $"{Math.Ceiling(prijsMiningRig)} BTC";
         }
 
         private void GridQuantum_MouseDown(object sender, MouseButtonEventArgs e)
@@ -197,7 +197,7 @@ namespace BitcoinMiner
             prijsQuantum *= 1.15;
             aantalQuantum++;
             TxtAantalQuantum.Content = (int)aantalQuantum;
-            TxtprijsQuantum.Content = $"{prijsQuantum:f2} BTC";
+            TxtprijsQuantum.Content = $"{Math.Ceiling(prijsQuantum)} BTC";
         }
         #endregion
 
