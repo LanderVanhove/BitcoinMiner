@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -29,7 +30,7 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 2000;
+        double aantalBTC = 500000;
 
 
         double prijsBasic = 15;
@@ -62,6 +63,7 @@ namespace BitcoinMiner
             timer_ms.Start();
         }
 
+
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
@@ -77,9 +79,10 @@ namespace BitcoinMiner
             aantalBTC += (passiefTotaal * elapsedTimeInSeconds);
 
             //update totale BTC in shop en titel
-            LblBTC.Content = $"{Math.Ceiling(aantalBTC)}";
+            TxtAantalBTC.Content = $"{Math.Ceiling(aantalBTC)}";
             this.Title = $"You have mined {Math.Ceiling(aantalBTC)} BTC so far!";
 
+            TekstGamification();
 
         }
 
@@ -187,6 +190,35 @@ namespace BitcoinMiner
             Timer_ms_Load();
         }
 
+        private async void TekstGamification()
+        {
+            if (passiefTotaal >= 100 )
+            {
+                TxtAantalBTC.FontSize = 36;
+                TxtBTC.FontSize = 36;
+            }
+            else if (passiefTotaal >= 50)
+            {
+                TxtAantalBTC.FontSize = 32;
+                TxtBTC.FontSize = 32;
+            }
+            else if (passiefTotaal >= 25)
+            {
+                TxtAantalBTC.FontSize = 28;
+                TxtBTC.FontSize = 28;
+            }
+            else if (passiefTotaal >= 10)
+            {
+                TxtAantalBTC.FontSize = 24;
+                TxtBTC.FontSize = 24;
+            }
+            else if (passiefTotaal >= 1)
+            {
+                TxtAantalBTC.FontSize = 20;
+                TxtBTC.FontSize = 20;
+            }
+        }
+
 
         #region Shopitems click events
         private void GridBasic_MouseDown(object sender, MouseButtonEventArgs e)
@@ -198,6 +230,17 @@ namespace BitcoinMiner
             TxtprijsBasic.Content = $"{Math.Ceiling(prijsBasic)} BTC";
 
             passiefBasic += 0.1;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BasicTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BasicTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BasicTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BasicTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
         }
 
         private void GridAdvanced_MouseDown(object sender, MouseButtonEventArgs e)
@@ -209,6 +252,18 @@ namespace BitcoinMiner
             TxtprijsAdvanced.Content = $"{Math.Ceiling(prijsAdvanced)} BTC";
 
             passiefAdvanced += 1;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            AdvancedTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            AdvancedTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            AdvancedTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            AdvancedTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+
         }
 
         private void GridMiningRig_MouseDown(object sender, MouseButtonEventArgs e)
@@ -220,6 +275,17 @@ namespace BitcoinMiner
             TxtprijsMiningRig.Content = $"{Math.Ceiling(prijsMiningRig)} BTC";
 
             passiefMiningRig += 8;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            MiningRigTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            MiningRigTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            MiningRigTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            MiningRigTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
         }
 
         private void GridQuantum_MouseDown(object sender, MouseButtonEventArgs e)
@@ -231,6 +297,17 @@ namespace BitcoinMiner
             TxtprijsQuantum.Content = $"{Math.Ceiling(prijsQuantum)} BTC";
 
             passiefQuantum += 47;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            QuantumTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            QuantumTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            QuantumTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            QuantumTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
         }
         #endregion
 

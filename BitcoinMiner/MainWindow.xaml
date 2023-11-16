@@ -63,25 +63,54 @@
             </Image.Triggers>
         </Image>
 
-        <StackPanel Background="#0f127b" Margin="62,14,22,14">
-            <Label Name="LblNaam" Content="X's Bitcoin Emperium" 
-                   Width="200" Foreground="#00acd1" FontWeight="Bold" FontSize="18"/>
-            <WrapPanel>
-                <Label Content="BTC: " Width="150" Foreground="#00acd1" FontSize="18"/>
-                <Label x:Name="LblBTC" Content="-Aaantal BTC-" Width="150" 
-                       Foreground="#00acd1" FontSize="18"/>
+        <StackPanel 
+            Background="#0f127b" 
+            Margin="62,14,22,14">
+            <Label 
+                Name="LblNaam" 
+                Content="X's Bitcoin Emperium" 
+                Width="200" 
+                Foreground="#00acd1" 
+                FontWeight="Bold" 
+                FontSize="18"/>
+            <WrapPanel HorizontalAlignment="Center">
+                <Label 
+                    Name="TxtBTC"
+                    Content="₿" 
+                    Width="150" 
+                    Foreground="#00acd1" 
+                    FontSize="18"
+                    HorizontalContentAlignment="Right"/>
+                <Label 
+                    x:Name="TxtAantalBTC" 
+                    Content="0" 
+                    Width="150" 
+                    Foreground="#00acd1" 
+                    FontSize="18"/>
             </WrapPanel>
-            <WrapPanel>
-                <Label Content="BTC/s: " Width="150" Foreground="#00acd1" FontSize="18"/>
-                <Label x:Name="LblBTCpersec" Content="-Aaantal BTC/s-" Width="150" 
-                       Foreground="#00acd1" FontSize="18"/>
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="₿ per second: " 
+                       Width="150" 
+                       Foreground="#00acd1" 
+                       FontSize="18"
+                       HorizontalContentAlignment="Right"/>
+                <Label 
+                    x:Name="LblBTCpersec" 
+                    Content="0" 
+                    Width="150" 
+                    Foreground="#00acd1" 
+                    FontSize="18"/>
             </WrapPanel>
         </StackPanel>
 
 
 
 
-        <Grid Grid.Column="1" Grid.RowSpan="2" Margin="20" Background="#001969">
+        <Grid 
+            Grid.Column="1" 
+            Grid.RowSpan="2" 
+            Margin="20" 
+            Background="#001969">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -113,14 +142,17 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
-
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="BasicTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
                     <Image 
                                 Source="Media/basicMiner.png"
                                 Grid.Column="0"/>
                     <StackPanel 
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                        <Label 
+                        <Label
+                                Name="TxtNaamBasic"
                                 Content="Basic Miner" 
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
@@ -155,6 +187,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="AdvancedTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
                     <Image Source="Media/advancedminer.png"
                            Grid.Column="0"/>
                     <StackPanel 
@@ -195,6 +230,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="MiningRigTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
                     <Image Source="Media/miningrig.png"
                            Grid.Column="0"/>
                     <StackPanel 
@@ -238,6 +276,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="75"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="QuantumTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
                     <Image Source="Media/quantum.png"
                            Grid.Column="0" 
                            />
