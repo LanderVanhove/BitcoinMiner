@@ -106,7 +106,8 @@
                     >
                 <Grid 
                     Name="GridBasic"
-                    Opacity="0.3">
+                    Opacity="0.3" 
+                    MouseDown="GridBasic_MouseDown" MouseEnter="GridBasic_MouseEnter" MouseLeave="GridBasic_MouseLeave">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
@@ -124,11 +125,13 @@
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
                         <Label 
+                                Name="TxtprijsBasic"
                                 Content="15 BTC" 
                                 Foreground="#00acd1" 
                                 FontSize="18"/>
                     </StackPanel>
                     <Label 
+                            Name="TxtAantalBasic"
                             Content="0" 
                             Foreground="#00acd1" 
                             FontSize="18" 
@@ -145,7 +148,8 @@
                     Grid.Row="2">
                 <Grid
                     Name="GridAdvanced"
-                    Opacity="0.3">
+                    Opacity="0.3" 
+                    MouseDown="GridAdvanced_MouseDown" MouseEnter="GridAdvanced_MouseEnter" MouseLeave="GridAdvanced_MouseLeave">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
@@ -161,11 +165,13 @@
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
                         <Label 
+                                Name="TxtprijsAdvanced"
                                 Content="100 BTC" 
                                 Foreground="#00acd1" 
                                 FontSize="18"/>
                     </StackPanel>
                     <Label 
+                            Name="TxtAantalAdvanced"
                             Content="0" 
                             Foreground="#00acd1" 
                             FontSize="18" 
@@ -182,7 +188,8 @@
                     Grid.Row="3">
                 <Grid
                     Name="GridMiningRig"
-                    Opacity="0.3">
+                    Opacity="0.3" 
+                    MouseDown="GridMiningRig_MouseDown" MouseEnter="GridMiningRig_MouseEnter" MouseLeave="GridMiningRig_MouseLeave">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
@@ -198,11 +205,14 @@
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
                         <Label 
+                                Name="TxtprijsMiningRig"
                                 Content="1100 BTC" 
                                 Foreground="#00acd1" 
                                 FontSize="18"/>
                     </StackPanel>
-                    <Label Content="0" 
+                    <Label 
+                               Name="TxtAantalMiningRig"
+                               Content="0" 
                                Foreground="#00acd1" 
                                FontSize="18" 
                                Grid.Column="2"
@@ -218,7 +228,11 @@
                     Grid.Row="4">
                 <Grid
                     Name="GridQuantum"
-                    Opacity="0.3">
+                    Opacity="0.3" 
+                    MouseDown="GridQuantum_MouseDown" 
+                    MouseEnter="GridQuantum_MouseEnter" 
+                    MouseLeave="GridQuantum_MouseLeave"
+                    >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
@@ -235,11 +249,14 @@
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
                         <Label 
+                                Name="TxtprijsQuantum"
                                 Content="12000 BTC" 
                                 Foreground="#00acd1" 
                                 FontSize="18"/>
                     </StackPanel>
-                    <Label Content="0" 
+                    <Label 
+                               Name="TxtAantalQuantum"
+                               Content="0" 
                                Foreground="#00acd1" 
                                FontSize="18"
                                Grid.Column="2"
