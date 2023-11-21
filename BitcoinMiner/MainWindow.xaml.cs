@@ -32,17 +32,19 @@ namespace BitcoinMiner
 
         double aantalBTC = 500000;
 
-
+        //prijs van elk shopitem
         double prijsBasic = 15;
         double prijsAdvanced = 100;
         double prijsMiningRig = 1100;
         double prijsQuantum = 12000;
 
+        //aantal shopitems de klikker heeft
         double aantalBasic = 0;
         double aantalAdvanced = 0;
         double aantalMiningRig = 0;
         double aantalQuantum = 0;
 
+        //passief inkomen dat er bekomen in
         double passiefBasic = 0;
         double passiefAdvanced = 0;
         double passiefMiningRig = 0;
@@ -62,11 +64,10 @@ namespace BitcoinMiner
             timer_ms.Tick += Timer_ms_Tick;
             timer_ms.Start();
         }
-
-
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
+            TekstGamification();
 
             elapsedTimeInSeconds = stopwatch.ElapsedMilliseconds / 1000.0;
             stopwatch.Restart();
@@ -81,11 +82,8 @@ namespace BitcoinMiner
             //update totale BTC in shop en titel
             TxtAantalBTC.Content = $"{Math.Ceiling(aantalBTC)}";
             this.Title = $"You have mined {Math.Ceiling(aantalBTC)} BTC so far!";
-
-            TekstGamification();
-
         }
-
+        #region BTC_Munt_klikEvents
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ImgBTC.Height = 230;
@@ -100,7 +98,7 @@ namespace BitcoinMiner
         {
             ImgBTC.Height = 210;
         }
-
+        #endregion
         private void CheckStoreAvailability()
         {
             if (aantalBTC >= prijsBasic)
@@ -156,41 +154,7 @@ namespace BitcoinMiner
             }
         }
 
-        private void TooltipLoad()
-        {
-            ToolTip TTbasic = new ToolTip();
-            StringBuilder sbBasic = new StringBuilder();
-            sbBasic.AppendLine("Every basic miner will provide a passive income of 0.1 BTC every second");
-            TTbasic.Content = sbBasic.ToString();
-            GridBasic.ToolTip = TTbasic;
-
-            ToolTip TTadvanced = new ToolTip();
-            StringBuilder sbAdvanced = new StringBuilder();
-            sbAdvanced.AppendLine("Every Advanced miner will provide a passive income of 1 BTC every second");
-            TTadvanced.Content = sbAdvanced.ToString();
-            GridAdvanced.ToolTip = TTadvanced;
-
-            ToolTip TTminingRig = new ToolTip();
-            StringBuilder sbMiningRig = new StringBuilder();
-            sbMiningRig.AppendLine("Every Mining Rig will provide a passive income of 8 BTC every second");
-            TTminingRig.Content = sbMiningRig.ToString();
-            GridMiningRig.ToolTip = sbMiningRig;
-
-            ToolTip TTquantum = new ToolTip();
-            StringBuilder sbQuantum = new StringBuilder();
-            sbQuantum.AppendLine("Every Quantum miner will provide a passive income of 47 BTC every second");
-            TTquantum.Content = sbQuantum.ToString();
-            GridQuantum.ToolTip = sbQuantum;
-
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            TooltipLoad();
-            Timer_ms_Load();
-        }
-
-        private async void TekstGamification()
+        private void TekstGamification()
         {
             if (passiefTotaal >= 100 )
             {
@@ -218,7 +182,6 @@ namespace BitcoinMiner
                 TxtBTC.FontSize = 20;
             }
         }
-
 
         #region Shopitems click events
         private void GridBasic_MouseDown(object sender, MouseButtonEventArgs e)
@@ -311,7 +274,6 @@ namespace BitcoinMiner
         }
         #endregion
 
-
         #region Mouse events to change BG
         private void GridBasic_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -357,5 +319,38 @@ namespace BitcoinMiner
             GridQuantum.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
         }
         #endregion
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            TooltipLoad();
+            Timer_ms_Load();
+        }
+        private void TooltipLoad()
+        {
+            ToolTip TTbasic = new ToolTip();
+            StringBuilder sbBasic = new StringBuilder();
+            sbBasic.AppendLine("Every basic miner will provide a passive income of 0.1 BTC every second");
+            TTbasic.Content = sbBasic.ToString();
+            GridBasic.ToolTip = TTbasic;
+
+            ToolTip TTadvanced = new ToolTip();
+            StringBuilder sbAdvanced = new StringBuilder();
+            sbAdvanced.AppendLine("Every Advanced miner will provide a passive income of 1 BTC every second");
+            TTadvanced.Content = sbAdvanced.ToString();
+            GridAdvanced.ToolTip = TTadvanced;
+
+            ToolTip TTminingRig = new ToolTip();
+            StringBuilder sbMiningRig = new StringBuilder();
+            sbMiningRig.AppendLine("Every Mining Rig will provide a passive income of 8 BTC every second");
+            TTminingRig.Content = sbMiningRig.ToString();
+            GridMiningRig.ToolTip = sbMiningRig;
+
+            ToolTip TTquantum = new ToolTip();
+            StringBuilder sbQuantum = new StringBuilder();
+            sbQuantum.AppendLine("Every Quantum miner will provide a passive income of 47 BTC every second");
+            TTquantum.Content = sbQuantum.ToString();
+            GridQuantum.ToolTip = sbQuantum;
+
+        }
     }
 }
