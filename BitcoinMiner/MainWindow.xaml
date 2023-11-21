@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BitcoinMiner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="MainWindow" Height="600" Width="1000" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontFamily" Value="Bahnschrift" />
@@ -16,7 +16,7 @@
             <ImageBrush ImageSource="Media/bg.png"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="420"/>
+            <ColumnDefinition Width=".8*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -24,11 +24,7 @@
             <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Image Source="Media/neon.png" 
-               Stretch="Fill"
-               Width="600"
-               Margin="-70,0,0,0"
-               />
+
 
         <Image x:Name="ImgBTC" 
                Source="Media/bitcoin.png"
@@ -110,6 +106,7 @@
             Grid.Column="1" 
             Grid.RowSpan="2" 
             Margin="20" 
+            MaxWidth="600"
             Background="#001969">
             <Grid.RowDefinitions>
                 <RowDefinition/>

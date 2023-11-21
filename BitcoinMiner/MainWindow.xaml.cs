@@ -30,7 +30,7 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 500000;
+        double aantalBTC = 1250000000;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -67,7 +67,6 @@ namespace BitcoinMiner
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
-            TekstGamification();
 
             elapsedTimeInSeconds = stopwatch.ElapsedMilliseconds / 1000.0;
             stopwatch.Restart();
@@ -80,9 +79,59 @@ namespace BitcoinMiner
             aantalBTC += (passiefTotaal * elapsedTimeInSeconds);
 
             //update totale BTC in shop en titel
-            TxtAantalBTC.Content = $"{Math.Ceiling(aantalBTC)}";
-            this.Title = $"You have mined {Math.Ceiling(aantalBTC)} BTC so far!";
+            WeergaveCijfer();
         }
+
+        private void WeergaveCijfer()
+        {
+            double tempBTC = 0;
+
+
+
+
+            if (aantalBTC >= 1000000000000000000)
+            {
+                tempBTC = aantalBTC / 1000000000000000000;
+                TxtAantalBTC.Content = $"{tempBTC:f3} Quintillion";
+                this.Title = $"You have {tempBTC:f3} Quintillion BTC!";
+            }
+            else if (aantalBTC >= 1000000000000000)
+            {
+                tempBTC = aantalBTC / 1000000000000000;
+                TxtAantalBTC.Content = $"{tempBTC:f3} Quadrillion";
+                this.Title = $"You have {tempBTC:f3} Quadrillion BTC";
+            }
+            else if (aantalBTC >= 1000000000000)
+            {
+                tempBTC = aantalBTC / 1000000000000;
+                TxtAantalBTC.Content = $"{tempBTC:f3} Trillion";
+                this.Title = $"You have {tempBTC:f3} Trillion BTC";
+            }
+            else if (aantalBTC >= 1000000000000)
+            {
+                tempBTC = aantalBTC / 1000000000000;
+                TxtAantalBTC.Content = $"{tempBTC:f3} Trillion";
+                this.Title = $"You have {tempBTC:f3} Trillion BTC";
+            }
+            else if (aantalBTC >= 1000000000)
+            {
+                tempBTC = aantalBTC / 1000000000;
+                TxtAantalBTC.Content = $"{tempBTC:f3} Billion";
+                this.Title = $"You have {tempBTC:f3} Billion BTC";
+            }
+            else if (aantalBTC >= 1000000)
+            {
+                tempBTC = aantalBTC / 1000000;
+                TxtAantalBTC.Content = $"{tempBTC:f3} Million";
+                this.Title = $"You have {tempBTC:f3} Million BTC";
+            }
+            else
+            {
+                TxtAantalBTC.Content = $"{Math.Ceiling(aantalBTC)}";
+                this.Title = $"You have {Math.Ceiling(aantalBTC)} BTC";
+            }
+        }
+
         #region BTC_Munt_klikEvents
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
