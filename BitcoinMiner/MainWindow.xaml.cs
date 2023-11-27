@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 1250000000;
+        double aantalBTC = 9999;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -86,9 +87,6 @@ namespace BitcoinMiner
         {
             double tempBTC = 0;
 
-
-
-
             if (aantalBTC >= 1000000000000000000)
             {
                 tempBTC = aantalBTC / 1000000000000000000;
@@ -124,6 +122,15 @@ namespace BitcoinMiner
                 tempBTC = aantalBTC / 1000000;
                 TxtAantalBTC.Content = $"{tempBTC:f3} Million";
                 this.Title = $"You have {tempBTC:f3} Million BTC";
+            }
+            else if (aantalBTC <1000000)
+            {
+                NumberFormatInfo formatInfo = new NumberFormatInfo
+                {
+                    NumberGroupSeparator = " "
+                };
+                TxtAantalBTC.Content = aantalBTC.ToString("n0", formatInfo);
+
             }
             else
             {
