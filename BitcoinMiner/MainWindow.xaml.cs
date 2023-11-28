@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -576,6 +577,39 @@ namespace BitcoinMiner
 
         }
 
+        private void LblNaam_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            VraagNaam();
 
+        }
+        private void VraagNaam()
+        {
+            string invoer = Interaction.InputBox("What's the name of your Bitcoin Mining Emperium?");
+            if (invoer == "")
+            {
+                MessageBox.Show("Please enter a valid name");
+                VraagNaam();
+            }
+            else if (invoer.Length > 12 | invoer.Length < 3)
+            {
+                MessageBox.Show("Please enter a name between 3 and 12 characters");
+                VraagNaam();
+            }
+          
+            else
+            {
+                LblNaam.Content = $"{invoer}'s Mining Emperium";
+            }
+        }
+
+        private void LblNaam_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LblNaam.Foreground = Brushes.Purple;
+        }
+
+        private void LblNaam_MouseLeave(object sender, MouseEventArgs e)
+        {
+            LblNaam.Foreground = new SolidColorBrush(Color.FromRgb(0, 172, 209));
+        }
     }
 }

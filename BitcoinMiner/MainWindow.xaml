@@ -64,36 +64,32 @@
             Margin="62,14,22,14">
             <Label 
                 Name="LblNaam" 
-                Content="X's Bitcoin Emperium" 
-                Width="200" 
+                Content="PXL's Bitcoin Emperium" 
+                HorizontalAlignment="Center" 
                 Foreground="#00acd1" 
                 FontWeight="Bold" 
-                FontSize="18"/>
+                FontSize="18" MouseDown="LblNaam_MouseDown" MouseEnter="LblNaam_MouseEnter" MouseLeave="LblNaam_MouseLeave"/>
             <WrapPanel HorizontalAlignment="Center">
                 <Label 
                     Name="TxtBTC"
                     Content="₿" 
-                    Width="150" 
                     Foreground="#00acd1" 
                     FontSize="18"
                     HorizontalContentAlignment="Right"/>
                 <Label 
                     x:Name="TxtAantalBTC" 
                     Content="0" 
-                    Width="150" 
                     Foreground="#00acd1" 
                     FontSize="18"/>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
                 <Label Content="₿ per second: " 
-                       Width="150" 
                        Foreground="#00acd1" 
                        FontSize="18"
                        HorizontalContentAlignment="Right"/>
                 <Label 
                     x:Name="LblBTCpersec" 
                     Content="0" 
-                    Width="150" 
                     Foreground="#00acd1" 
                     FontSize="18"/>
             </WrapPanel>
