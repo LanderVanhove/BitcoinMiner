@@ -22,7 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
 
@@ -114,6 +114,10 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+
             </Grid.RowDefinitions>
             <Label Content="Shop"  
                        Foreground="#00acd1" 
@@ -303,6 +307,143 @@
                 </Grid>
             </Border>
 
+            <Border
+        Name="BorderClock"
+        BorderBrush="#008dff"
+        BorderThickness="0"
+        Grid.Row="5"
+        >
+                <Grid 
+        Name="GridClock"
+        Opacity="0.3" MouseDown="GridClock_MouseDown" MouseEnter="GridClock_MouseEnter" MouseLeave="GridClock_MouseLeave" 
+        >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="75"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="ClockTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
+                    <Image 
+                    Source="Media/laptop.png"
+                    Grid.Column="0"/>
+                    <StackPanel 
+                Grid.Column="1"
+                VerticalAlignment="Center">
+                        <Label
+                    Name="TxtNaamClock"
+                    Content="Overclocking Module" 
+                    Foreground="#00acd1" 
+                    FontSize="26"/>
+                        <Label 
+                    Name="TxtPrijsClock"
+                    Content="130000 BTC" 
+                    Foreground="#00acd1" 
+                    FontSize="18"/>
+                    </StackPanel>
+                    <Label 
+                Name="TxtAantalClock"
+                Content="0" 
+                Foreground="#00acd1" 
+                FontSize="18" 
+                Grid.Column="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border
+Name="BorderCooling"
+BorderBrush="#008dff"
+BorderThickness="0"
+Grid.Row="6"
+>
+                <Grid 
+Name="GridCooling"
+Opacity="0.3" MouseDown="GridCooling_MouseDown" MouseEnter="GridCooling_MouseEnter" MouseLeave="GridCooling_MouseLeave" 
+>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="75"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="CoolingTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
+                    <Image 
+            Source="Media/cooling-fan.png"
+            Grid.Column="0"/>
+                    <StackPanel 
+        Grid.Column="1"
+        VerticalAlignment="Center">
+                        <Label
+            Name="TxtNaamCooling"
+            Content="Automatic Cooling System" 
+            Foreground="#00acd1" 
+            FontSize="26"/>
+                        <Label 
+            Name="TxtPrijsCooling"
+            Content="1400000 BTC" 
+            Foreground="#00acd1" 
+            FontSize="18"/>
+                    </StackPanel>
+                    <Label 
+        Name="TxtAantalCooling"
+        Content="0" 
+        Foreground="#00acd1" 
+        FontSize="18" 
+        Grid.Column="2"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border
+Name="BorderSecurity"
+BorderBrush="#008dff"
+BorderThickness="0"
+Grid.Row="7"
+>
+                <Grid 
+Name="GridSecurity"
+Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseEnter" MouseLeave="GridSecurity_MouseLeave" 
+>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="75"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="SecurityTransform" ScaleX="1" ScaleY="1"/>
+                    </Grid.RenderTransform>
+                    <Image 
+            Source="Media/blockchain.png"
+            Grid.Column="0"/>
+                    <StackPanel 
+        Grid.Column="1"
+        VerticalAlignment="Center">
+                        <Label
+            Name="TxtNaamSecurity"
+            Content="Blockchain Security Protocol" 
+            Foreground="#00acd1" 
+            FontSize="26"/>
+                        <Label 
+            Name="TxtPrijsSecurity"
+            Content="20000000 BTC" 
+            Foreground="#00acd1" 
+            FontSize="18"/>
+                    </StackPanel>
+                    <Label 
+        Name="TxtAantalSecurity"
+        Content="0" 
+        Foreground="#00acd1" 
+        FontSize="18" 
+        Grid.Column="2"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>

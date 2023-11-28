@@ -109,5 +109,10 @@
     <Resource Include="Media\miningRig.png" />
     <Resource Include="Media\quantum.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\blockchain.png" />
+    <Resource Include="Media\cooling-fan.png" />
+    <Resource Include="Media\laptop.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

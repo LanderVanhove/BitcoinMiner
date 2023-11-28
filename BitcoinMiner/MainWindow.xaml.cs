@@ -31,25 +31,34 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 9999;
+        double aantalBTC = 19999999;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
         double prijsAdvanced = 100;
         double prijsMiningRig = 1100;
         double prijsQuantum = 12000;
+        double prijsClock = 130000;
+        double prijsCooler = 1400000;
+        double prijsSecurity = 20000000;
 
         //aantal shopitems de klikker heeft
         double aantalBasic = 0;
         double aantalAdvanced = 0;
         double aantalMiningRig = 0;
         double aantalQuantum = 0;
+        double aantalClock = 0;
+        double aantalCooler = 0;
+        double aantalSecurity = 0;
 
         //passief inkomen dat er bekomen in
         double passiefBasic = 0;
         double passiefAdvanced = 0;
         double passiefMiningRig = 0;
         double passiefQuantum = 0;
+        double passiefClock = 0;
+        double passiefCooler = 0;
+        double passiefSecurity = 0;
         double passiefTotaal = 0;
 
 
@@ -73,7 +82,7 @@ namespace BitcoinMiner
             stopwatch.Restart();
 
             //update totale passief BTC
-            passiefTotaal = passiefBasic + passiefAdvanced + passiefMiningRig + passiefQuantum;
+            passiefTotaal = passiefBasic + passiefAdvanced + passiefMiningRig + passiefQuantum + passiefClock + passiefCooler + passiefSecurity;
             LblBTCpersec.Content = passiefTotaal.ToString();
 
             //update totale BTC adhv passief inkomen
@@ -208,6 +217,43 @@ namespace BitcoinMiner
                 GridQuantum.IsEnabled = false;
                 BorderQuantum.BorderThickness = new Thickness(0);
             }
+
+            if (aantalBTC >= prijsClock)
+            {
+                GridClock.Opacity = 1;
+                GridClock.IsEnabled = true;
+                BorderClock.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridClock.Opacity = 0.3;
+                GridClock.IsEnabled = false;
+                BorderClock.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsCooler)
+            {
+                GridCooling.Opacity = 1;
+                GridCooling.IsEnabled = true;
+                BorderCooling.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridCooling.Opacity = 0.3;
+                GridCooling.IsEnabled = false;
+                BorderCooling.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsSecurity)
+            {
+                GridSecurity.Opacity = 1;
+                GridSecurity.IsEnabled = true;
+                BorderSecurity.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridSecurity.Opacity = 0.3;
+                GridSecurity.IsEnabled = false;
+                BorderSecurity.BorderThickness = new Thickness(0);
+            }
         }
 
         private void TekstGamification()
@@ -328,6 +374,72 @@ namespace BitcoinMiner
             QuantumTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
             QuantumTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
         }
+
+        private void GridClock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsClock;
+            prijsClock *= 1.15;
+            aantalClock++;
+            TxtAantalClock.Content = (int)aantalClock;
+            TxtPrijsClock.Content = $"{Math.Ceiling(prijsClock)} BTC";
+
+            passiefClock += 260;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            ClockTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            ClockTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            ClockTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            ClockTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridCooling_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsCooler;
+            prijsCooler *= 1.15;
+            aantalCooler++;
+            TxtAantalCooling.Content = (int)aantalCooler;
+            TxtPrijsCooling.Content = $"{Math.Ceiling(prijsCooler)} BTC";
+
+            passiefClock += 1400;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            CoolingTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            CoolingTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            CoolingTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            CoolingTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridSecurity_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsSecurity;
+            prijsSecurity *= 1.15;
+            aantalSecurity++;
+            TxtAantalSecurity.Content = (int)aantalSecurity;
+            TxtPrijsSecurity.Content = $"{Math.Ceiling(prijsSecurity)} BTC";
+
+            passiefSecurity += 1400;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            SecurityTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            SecurityTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            SecurityTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            SecurityTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
         #endregion
 
         #region Mouse events to change BG
@@ -374,6 +486,41 @@ namespace BitcoinMiner
         {
             GridQuantum.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
         }
+        private void GridClock_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridClock.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridClock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridClock.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
+
+        private void GridCooling_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridCooling.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridCooling_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridCooling.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
+
+        private void GridSecurity_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridSecurity.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridSecurity_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridSecurity.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
         #endregion
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -407,6 +554,28 @@ namespace BitcoinMiner
             TTquantum.Content = sbQuantum.ToString();
             GridQuantum.ToolTip = sbQuantum;
 
+            ToolTip TTclock = new ToolTip();
+            StringBuilder sbClock = new StringBuilder();
+            sbClock.AppendLine("Every Overclocking Module will provide a passive income of 260 BTC every second");
+            TTclock.Content = sbClock.ToString();
+            GridClock.ToolTip = sbClock;
+
+            ToolTip TTcooler = new ToolTip();
+            StringBuilder sbCooler = new StringBuilder();
+            sbClock.AppendLine("Every Automatic Cooling System will provide a passive income of 1400 BTC every second");
+            TTcooler.Content = sbCooler.ToString();
+            GridCooling.ToolTip = sbCooler;
+
+            ToolTip TTsecurity = new ToolTip();
+            StringBuilder sbSecurity = new StringBuilder();
+            sbSecurity.AppendLine("Every BlockChain Security Protocol will provide a passive income of 7800 BTC every second");
+            TTsecurity.Content = sbSecurity.ToString();
+            GridSecurity.ToolTip = sbSecurity;
+
+
+
         }
+
+
     }
 }
