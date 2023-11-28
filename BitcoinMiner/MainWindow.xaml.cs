@@ -585,7 +585,7 @@ namespace BitcoinMiner
         private void VraagNaam()
         {
             string invoer = Interaction.InputBox("What's the name of your Bitcoin Mining Emperium?");
-            if (invoer == "")
+            if (invoer.Trim() == "")
             {
                 MessageBox.Show("Please enter a valid name");
                 VraagNaam();
