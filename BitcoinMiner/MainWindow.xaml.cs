@@ -32,7 +32,7 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 19999999;
+        double aantalBTC = 20000000;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -289,6 +289,7 @@ namespace BitcoinMiner
         #region Shopitems click events
         private void GridBasic_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ToevoegenBasic();
             aantalBTC -= prijsBasic;
             prijsBasic *= 1.15;
             aantalBasic++;
@@ -311,6 +312,7 @@ namespace BitcoinMiner
 
         private void GridAdvanced_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ToevoegenAdvanced();
             aantalBTC -= prijsAdvanced;
             prijsAdvanced *= 1.15;
             aantalAdvanced++;
@@ -334,6 +336,7 @@ namespace BitcoinMiner
 
         private void GridMiningRig_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ToevoegenMining();
             aantalBTC -= prijsMiningRig;
             prijsMiningRig *= 1.15;
             aantalMiningRig++;
@@ -356,6 +359,7 @@ namespace BitcoinMiner
 
         private void GridQuantum_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ToevoegenQuantum();
             aantalBTC -= prijsQuantum;
             prijsQuantum *= 1.15;
             aantalQuantum++;
@@ -378,6 +382,7 @@ namespace BitcoinMiner
 
         private void GridClock_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ToevoegenClock();
             aantalBTC -= prijsClock;
             prijsClock *= 1.15;
             aantalClock++;
@@ -400,6 +405,7 @@ namespace BitcoinMiner
 
         private void GridCooling_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ToevoegenCooling();
             aantalBTC -= prijsCooler;
             prijsCooler *= 1.15;
             aantalCooler++;
@@ -422,6 +428,7 @@ namespace BitcoinMiner
 
         private void GridSecurity_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ToevoegenSecurity();
             aantalBTC -= prijsSecurity;
             prijsSecurity *= 1.15;
             aantalSecurity++;
@@ -563,13 +570,13 @@ namespace BitcoinMiner
 
             ToolTip TTcooler = new ToolTip();
             StringBuilder sbCooler = new StringBuilder();
-            sbClock.AppendLine("Every Automatic Cooling System will provide a passive income of 1400 BTC every second");
+            sbClock.AppendLine("Every Cooling System will provide a passive income of 1400 BTC every second");
             TTcooler.Content = sbCooler.ToString();
             GridCooling.ToolTip = sbCooler;
 
             ToolTip TTsecurity = new ToolTip();
             StringBuilder sbSecurity = new StringBuilder();
-            sbSecurity.AppendLine("Every BlockChain Security Protocol will provide a passive income of 7800 BTC every second");
+            sbSecurity.AppendLine("Every Security Protocol will provide a passive income of 7800 BTC every second");
             TTsecurity.Content = sbSecurity.ToString();
             GridSecurity.ToolTip = sbSecurity;
 
@@ -577,6 +584,7 @@ namespace BitcoinMiner
 
         }
 
+        #region Naam Miner Veranderen
         private void LblNaam_MouseDown(object sender, MouseButtonEventArgs e)
         {
             VraagNaam();
@@ -611,5 +619,77 @@ namespace BitcoinMiner
         {
             LblNaam.Foreground = new SolidColorBrush(Color.FromRgb(0, 172, 209));
         }
+        #endregion
+
+        #region Gekochte items toevoegen aan UI
+        private void ToevoegenBasic()
+        {
+            Image basic = new Image();
+            basic.Source = new BitmapImage(new Uri(@"Media/basicMiner.png", UriKind.RelativeOrAbsolute));
+            basic.Height = 70;
+            basic.Margin = new Thickness(2);
+            wrapBasic.Children.Add(basic);
+            wrapBasic.Visibility = Visibility.Visible;
+            wrapItems.Visibility = Visibility.Visible;
+        }
+        private void ToevoegenAdvanced()
+        {
+            Image advanced = new Image();
+            advanced.Source = new BitmapImage(new Uri(@"Media/AdvancedMiner.png", UriKind.RelativeOrAbsolute));
+            advanced.Height = 70;
+            advanced.Margin = new Thickness(2);
+            wrapAdvanced.Children.Add(advanced);
+            wrapAdvanced.Visibility = Visibility.Visible;
+        }
+
+        private void ToevoegenMining()
+        {
+            Image mining = new Image();
+            mining.Source = new BitmapImage(new Uri(@"Media/miningRig.png", UriKind.RelativeOrAbsolute));
+            mining.Height = 70;
+            mining.Margin = new Thickness(2);
+            wrapMining.Children.Add(mining);
+            wrapMining.Visibility = Visibility.Visible;
+        }
+        private void ToevoegenQuantum()
+        {
+            Image quantum = new Image();
+            quantum.Source = new BitmapImage(new Uri(@"Media/quantum.png", UriKind.RelativeOrAbsolute));
+            quantum.Height = 70;
+            quantum.Margin = new Thickness(2);
+            wrapQuantum.Children.Add(quantum);
+            wrapQuantum.Visibility = Visibility.Visible;
+        }
+        private void ToevoegenClock()
+        {
+            Image Clock = new Image();
+            Clock.Source = new BitmapImage(new Uri(@"Media/laptop.png", UriKind.RelativeOrAbsolute));
+            Clock.Height = 70;
+            Clock.Margin = new Thickness(2);
+            wrapClock.Children.Add(Clock);
+            wrapClock.Visibility = Visibility.Visible;
+        }
+        private void ToevoegenCooling()
+        {
+            Image cooling = new Image();
+            cooling.Source = new BitmapImage(new Uri(@"Media/cooling-fan.png", UriKind.RelativeOrAbsolute));
+            cooling.Height = 70;
+            cooling.Margin = new Thickness(2);
+            wrapCooling.Children.Add(cooling);
+            wrapCooling.Visibility = Visibility.Visible;
+        }
+        private void ToevoegenSecurity()
+        {
+            Image security = new Image();
+            security.Source = new BitmapImage(new Uri(@"Media/blockchain.png", UriKind.RelativeOrAbsolute));
+            security.Height = 70;
+            security.Margin = new Thickness(2);
+            wrapSecurity.Children.Add(security);
+            wrapSecurity.Visibility = Visibility.Visible;
+        }
+
+
+        #endregion
+
     }
 }

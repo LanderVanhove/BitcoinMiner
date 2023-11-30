@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BitcoinMiner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000" Loaded="Window_Loaded">
+        Title="MainWindow" Height="800" Width="1300" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontFamily" Value="Bahnschrift" />
@@ -16,8 +16,10 @@
             <ImageBrush ImageSource="Media/bg.png"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".8*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="539*"/>
+            <ColumnDefinition Width="301*"/>
+            <ColumnDefinition Width="400*"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
@@ -29,11 +31,12 @@
         <Image x:Name="ImgBTC" 
                Source="Media/bitcoin.png"
                Grid.Row="1"
-               Height="210"
-               Margin="30,0,0,0" 
+               Margin="61,152,21,152" 
                MouseDown="ImgBTC_MouseDown" 
                MouseUp="ImgBTC_MouseUp" 
-               MouseLeave="ImgBTC_MouseLeave">
+               MouseLeave="ImgBTC_MouseLeave"
+               Height="210"
+               >
             <Image.Triggers>
                 <EventTrigger RoutedEvent="MouseDown">
                     <BeginStoryboard>
@@ -95,14 +98,11 @@
             </WrapPanel>
         </StackPanel>
 
-
-
-
         <Grid 
-            Grid.Column="1" 
-            Grid.RowSpan="2" 
-            Margin="20" 
-            MaxWidth="600"
+            Grid.Column="2" 
+            Grid.RowSpan="3" 
+            Margin="20,20,20,20" 
+            MaxWidth="400"
             Background="#001969">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -375,7 +375,7 @@ Opacity="0.3" MouseDown="GridCooling_MouseDown" MouseEnter="GridCooling_MouseEnt
         VerticalAlignment="Center">
                         <Label
             Name="TxtNaamCooling"
-            Content="Automatic Cooling System" 
+            Content="Cooling System" 
             Foreground="#00acd1" 
             FontSize="26"/>
                         <Label 
@@ -421,7 +421,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
         VerticalAlignment="Center">
                         <Label
             Name="TxtNaamSecurity"
-            Content="Blockchain Security Protocol" 
+            Content="Security Protocol" 
             Foreground="#00acd1" 
             FontSize="26"/>
                         <Label 
@@ -441,5 +441,65 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                 </Grid>
             </Border>
         </Grid>
+        <Grid Name="gridItems"  Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="20,20,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Name="wrapItems" Background="#0f127b" Visibility="Hidden">
+                <TextBlock Text="Items"
+           Foreground="Purple" 
+           FontWeight="Bold" 
+           FontSize="48"
+           Grid.Row="0"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"/>
+            </Grid>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapBasic" Background="#0f127b" Visibility="Hidden" Orientation="Horizontal" ScrollViewer.CanContentScroll="True" >
+                </WrapPanel>
+            </ScrollViewer>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="2" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapAdvanced" Background="#0f127b" Visibility="Hidden">
+                </WrapPanel>
+            </ScrollViewer>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="3" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapMining" Background="#0f127b" Visibility="Hidden">
+                </WrapPanel>
+            </ScrollViewer>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="4" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapQuantum" Background="#0f127b" Visibility="Hidden">
+                </WrapPanel>
+            </ScrollViewer>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="5" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapClock" Background="#0f127b" Visibility="Hidden">
+                </WrapPanel>
+            </ScrollViewer>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="6" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapCooling" Background="#0f127b" Visibility="Hidden">
+                </WrapPanel>
+            </ScrollViewer>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="7" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapSecurity" Background="#0f127b" Visibility="Hidden">
+                </WrapPanel>
+            </ScrollViewer>
+
+        </Grid>
+
+        
+        
     </Grid>
 </Window>
