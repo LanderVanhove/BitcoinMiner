@@ -32,7 +32,7 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 20000000;
+        double aantalBTC = 200000000;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -640,6 +640,8 @@ namespace BitcoinMiner
             advanced.Margin = new Thickness(2);
             wrapAdvanced.Children.Add(advanced);
             wrapAdvanced.Visibility = Visibility.Visible;
+            wrapItems.Visibility = Visibility.Visible;
+
         }
 
         private void ToevoegenMining()
@@ -650,6 +652,7 @@ namespace BitcoinMiner
             mining.Margin = new Thickness(2);
             wrapMining.Children.Add(mining);
             wrapMining.Visibility = Visibility.Visible;
+            wrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenQuantum()
         {
@@ -659,6 +662,7 @@ namespace BitcoinMiner
             quantum.Margin = new Thickness(2);
             wrapQuantum.Children.Add(quantum);
             wrapQuantum.Visibility = Visibility.Visible;
+            wrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenClock()
         {
@@ -668,6 +672,7 @@ namespace BitcoinMiner
             Clock.Margin = new Thickness(2);
             wrapClock.Children.Add(Clock);
             wrapClock.Visibility = Visibility.Visible;
+            wrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenCooling()
         {
@@ -677,6 +682,7 @@ namespace BitcoinMiner
             cooling.Margin = new Thickness(2);
             wrapCooling.Children.Add(cooling);
             wrapCooling.Visibility = Visibility.Visible;
+            wrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenSecurity()
         {
@@ -686,6 +692,7 @@ namespace BitcoinMiner
             security.Margin = new Thickness(2);
             wrapSecurity.Children.Add(security);
             wrapSecurity.Visibility = Visibility.Visible;
+            wrapItems.Visibility = Visibility.Visible;
         }
 
 

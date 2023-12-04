@@ -16,19 +16,20 @@
             <ImageBrush ImageSource="Media/bg.png"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="539*"/>
-            <ColumnDefinition Width="301*"/>
-            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="1.8*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.3*"/>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-            <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.05*"/>
         </Grid.RowDefinitions>
 
 
-        <Image x:Name="ImgBTC" 
+        <Viewbox x:Name="vbBTCImage" Grid.Row="1">
+            <Image x:Name="ImgBTC" 
                Source="Media/bitcoin.png"
                Grid.Row="1"
                Margin="61,152,21,152" 
@@ -37,66 +38,89 @@
                MouseLeave="ImgBTC_MouseLeave"
                Height="210"
                >
-            <Image.Triggers>
-                <EventTrigger RoutedEvent="MouseDown">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" To="230" Duration="0:0:0.1"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="MouseUp">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" To="210" Duration="0:0:0.1"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" To="210" Duration="0:0:0.1"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Image.Triggers>
-        </Image>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="MouseDown">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Height" To="230" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseUp">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Height" To="210" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Height" To="210" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+        </Viewbox>
 
-        <StackPanel 
+            <Grid 
+            x:Name="gridMinerName"
             Background="#0f127b" 
-            Margin="62,14,22,14">
-            <Label 
-                Name="LblNaam" 
-                Content="PXL's Bitcoin Emperium" 
-                HorizontalAlignment="Center" 
-                Foreground="#00acd1" 
-                FontWeight="Bold" 
-                FontSize="18" MouseDown="LblNaam_MouseDown" MouseEnter="LblNaam_MouseEnter" MouseLeave="LblNaam_MouseLeave"/>
-            <WrapPanel HorizontalAlignment="Center">
+            Grid.Row="0"
+            Grid.Column="0"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            <Viewbox Grid.ColumnSpan="2">
+                <Label 
+                    Name="LblNaam" 
+                    Content="PXL's Bitcoin Emperium" 
+                    Foreground="#00acd1" 
+                    FontWeight="Bold" 
+                    FontSize="18" 
+                    MouseDown="LblNaam_MouseDown" 
+                    MouseEnter="LblNaam_MouseEnter" 
+                    MouseLeave="LblNaam_MouseLeave"
+                    />
+            </Viewbox>
+            <Viewbox Grid.Row="1" HorizontalAlignment="Right">
                 <Label 
                     Name="TxtBTC"
                     Content="₿" 
                     Foreground="#00acd1" 
                     FontSize="18"
-                    HorizontalContentAlignment="Right"/>
+                    />
+            </Viewbox>
+            <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
                 <Label 
                     x:Name="TxtAantalBTC" 
                     Content="0" 
                     Foreground="#00acd1" 
                     FontSize="18"/>
-            </WrapPanel>
-            <WrapPanel HorizontalAlignment="Center">
-                <Label Content="₿ per second: " 
-                       Foreground="#00acd1" 
-                       FontSize="18"
-                       HorizontalContentAlignment="Right"/>
+            </Viewbox>
+            <Viewbox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">
+                <Label 
+                    Content="₿ per second: " 
+                    Foreground="#00acd1" 
+                    FontSize="18"
+                    />
+            </Viewbox>
+            <Viewbox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
                 <Label 
                     x:Name="LblBTCpersec" 
                     Content="0" 
                     Foreground="#00acd1" 
                     FontSize="18"/>
-            </WrapPanel>
-        </StackPanel>
+            </Viewbox>
+            </Grid>
 
         <Grid 
             Grid.Column="2" 
@@ -115,7 +139,8 @@
                 <RowDefinition/>
 
             </Grid.RowDefinitions>
-            <Label Content="Shop"  
+            <Viewbox>
+                <Label Content="Shop"  
                        Foreground="#00acd1" 
                        FontWeight="Bold" 
                        FontSize="48"
@@ -123,6 +148,7 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        />
+            </Viewbox>
 
             <Border
                     Name="BorderBasic"
@@ -135,38 +161,48 @@
                     Opacity="0.3" 
                     MouseDown="GridBasic_MouseDown" MouseEnter="GridBasic_MouseEnter" MouseLeave="GridBasic_MouseLeave">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RenderTransform>
                         <ScaleTransform x:Name="BasicTransform" ScaleX="1" ScaleY="1"/>
                     </Grid.RenderTransform>
-                    <Image 
-                                Source="Media/basicMiner.png"
-                                Grid.Column="0"/>
-                    <StackPanel 
+                        <Image Source="Media/basicMiner.png" Grid.Column="0"/>
+                    <Grid 
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                        <Label
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0">
+                            <Label
                                 Name="TxtNaamBasic"
                                 Content="Basic Miner" 
                                 Foreground="#00acd1" 
-                                FontSize="26"/>
-                        <Label 
+                                FontSize="26"
+                                />
+                        </Viewbox>
+
+                        <Viewbox Grid.Row="1">
+                            <Label 
                                 Name="TxtprijsBasic"
                                 Content="15 BTC" 
                                 Foreground="#00acd1" 
-                                FontSize="18"/>
-                    </StackPanel>
-                    <Label 
+                                FontSize="18"
+                            />
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Column="2">
+                        <Label 
                             Name="TxtAantalBasic"
                             Content="0" 
                             Foreground="#00acd1" 
                             FontSize="18" 
-                            Grid.Column="2"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
+                    </Viewbox>
                 </Grid>
             </Border>
 
@@ -180,36 +216,42 @@
                     Opacity="0.3" 
                     MouseDown="GridAdvanced_MouseDown" MouseEnter="GridAdvanced_MouseEnter" MouseLeave="GridAdvanced_MouseLeave">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RenderTransform>
                         <ScaleTransform x:Name="AdvancedTransform" ScaleX="1" ScaleY="1"/>
                     </Grid.RenderTransform>
-                    <Image Source="Media/advancedminer.png"
-                           Grid.Column="0"/>
-                    <StackPanel 
-                            Grid.Column="1"
-                            VerticalAlignment="Center">
-                        <Label 
+
+                        <Image Source="Media/advancedminer.png" Grid.Column="0"/>
+
+                    <Grid Grid.Column="1" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Viewbox>
+                            <Label 
                                 Content="Advanced Miner" 
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
-                        <Label 
+                        </Viewbox>
+                        <Viewbox Grid.Row="1">
+                            <Label 
                                 Name="TxtprijsAdvanced"
                                 Content="100 BTC" 
                                 Foreground="#00acd1" 
                                 FontSize="18"/>
-                    </StackPanel>
-                    <Label 
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Column="2">
+                        <Label 
                             Name="TxtAantalAdvanced"
                             Content="0" 
                             Foreground="#00acd1" 
-                            FontSize="18" 
-                            Grid.Column="2"
-                            VerticalAlignment="Center"
-                            HorizontalContentAlignment="Center"/>
+                            FontSize="18"/>
+                    </Viewbox>
                 </Grid>
             </Border>
 
@@ -223,36 +265,45 @@
                     Opacity="0.3" 
                     MouseDown="GridMiningRig_MouseDown" MouseEnter="GridMiningRig_MouseEnter" MouseLeave="GridMiningRig_MouseLeave">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RenderTransform>
                         <ScaleTransform x:Name="MiningRigTransform" ScaleX="1" ScaleY="1"/>
                     </Grid.RenderTransform>
                     <Image Source="Media/miningrig.png"
                            Grid.Column="0"/>
-                    <StackPanel 
+                    <Grid 
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                        <Label 
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Viewbox>
+                            <Label 
                                 Content="Mining Rig" 
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
-                        <Label 
+                        </Viewbox>
+                        <Viewbox Grid.Row="1">
+                            <Label 
                                 Name="TxtprijsMiningRig"
                                 Content="1100 BTC" 
                                 Foreground="#00acd1" 
                                 FontSize="18"/>
-                    </StackPanel>
-                    <Label 
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Column="2">
+                        <Label 
                                Name="TxtAantalMiningRig"
                                Content="0" 
                                Foreground="#00acd1" 
                                FontSize="18" 
-                               Grid.Column="2"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
+                    </Viewbox>
                 </Grid>
             </Border>
 
@@ -269,9 +320,9 @@
                     MouseLeave="GridQuantum_MouseLeave"
                     >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RenderTransform>
                         <ScaleTransform x:Name="QuantumTransform" ScaleX="1" ScaleY="1"/>
@@ -279,27 +330,37 @@
                     <Image Source="Media/quantum.png"
                            Grid.Column="0" 
                            />
-                    <StackPanel
+                    <Grid
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                        <Label 
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Viewbox>
+                            <Label 
                                 Content="Quantum miner" 
                                 Foreground="#00acd1" 
                                 FontSize="26"/>
-                        <Label 
+                        </Viewbox>
+                        <Viewbox Grid.Row="1">
+                            <Label 
                                 Name="TxtprijsQuantum"
                                 Content="12000 BTC" 
                                 Foreground="#00acd1" 
                                 FontSize="18"/>
-                    </StackPanel>
-                    <Label 
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Column="2"
+>
+                        <Label 
                                Name="TxtAantalQuantum"
                                Content="0" 
                                Foreground="#00acd1" 
                                FontSize="18"
-                               Grid.Column="2"
                                VerticalAlignment="Center"
                                HorizontalContentAlignment="Center"/>
+                    </Viewbox>
                 </Grid>
             </Border>
 
@@ -314,9 +375,9 @@
         Opacity="0.3" MouseDown="GridClock_MouseDown" MouseEnter="GridClock_MouseEnter" MouseLeave="GridClock_MouseLeave" 
         >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RenderTransform>
                         <ScaleTransform x:Name="ClockTransform" ScaleX="1" ScaleY="1"/>
@@ -324,28 +385,37 @@
                     <Image 
                     Source="Media/laptop.png"
                     Grid.Column="0"/>
-                    <StackPanel 
+                    <Grid 
                 Grid.Column="1"
                 VerticalAlignment="Center">
-                        <Label
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Viewbox>
+                            <Label
                     Name="TxtNaamClock"
                     Content="Overclocking Module" 
                     Foreground="#00acd1" 
                     FontSize="26"/>
-                        <Label 
+                        </Viewbox>
+                        <Viewbox Grid.Row="1">
+                            <Label 
                     Name="TxtPrijsClock"
                     Content="130000 BTC" 
                     Foreground="#00acd1" 
                     FontSize="18"/>
-                    </StackPanel>
-                    <Label 
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Column="2">
+                        <Label 
                 Name="TxtAantalClock"
                 Content="0" 
                 Foreground="#00acd1" 
                 FontSize="18" 
-                Grid.Column="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
+                    </Viewbox>
                 </Grid>
             </Border>
 
@@ -360,9 +430,9 @@ Name="GridCooling"
 Opacity="0.3" MouseDown="GridCooling_MouseDown" MouseEnter="GridCooling_MouseEnter" MouseLeave="GridCooling_MouseLeave" 
 >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RenderTransform>
                         <ScaleTransform x:Name="CoolingTransform" ScaleX="1" ScaleY="1"/>
@@ -370,28 +440,37 @@ Opacity="0.3" MouseDown="GridCooling_MouseDown" MouseEnter="GridCooling_MouseEnt
                     <Image 
             Source="Media/cooling-fan.png"
             Grid.Column="0"/>
-                    <StackPanel 
+                    <Grid 
         Grid.Column="1"
         VerticalAlignment="Center">
-                        <Label
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Viewbox>
+                            <Label
             Name="TxtNaamCooling"
             Content="Cooling System" 
             Foreground="#00acd1" 
             FontSize="26"/>
-                        <Label 
+                        </Viewbox>
+                        <Viewbox Grid.Row="1">
+                            <Label 
             Name="TxtPrijsCooling"
             Content="1400000 BTC" 
             Foreground="#00acd1" 
             FontSize="18"/>
-                    </StackPanel>
-                    <Label 
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Column="2">
+                        <Label 
         Name="TxtAantalCooling"
         Content="0" 
         Foreground="#00acd1" 
         FontSize="18" 
-        Grid.Column="2"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"/>
+                    </Viewbox>
                 </Grid>
             </Border>
 
@@ -406,9 +485,9 @@ Name="GridSecurity"
 Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseEnter" MouseLeave="GridSecurity_MouseLeave" 
 >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RenderTransform>
                         <ScaleTransform x:Name="SecurityTransform" ScaleX="1" ScaleY="1"/>
@@ -416,78 +495,83 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                     <Image 
             Source="Media/blockchain.png"
             Grid.Column="0"/>
-                    <StackPanel 
+                    <Grid 
         Grid.Column="1"
         VerticalAlignment="Center">
-                        <Label
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Viewbox>
+                            <Label
             Name="TxtNaamSecurity"
             Content="Security Protocol" 
             Foreground="#00acd1" 
             FontSize="26"/>
-                        <Label 
+                        </Viewbox>
+                        <Viewbox Grid.Row="1">
+                            <Label 
             Name="TxtPrijsSecurity"
             Content="20000000 BTC" 
             Foreground="#00acd1" 
             FontSize="18"/>
-                    </StackPanel>
-                    <Label 
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Column="2">
+                        <Label 
         Name="TxtAantalSecurity"
         Content="0" 
         Foreground="#00acd1" 
         FontSize="18" 
-        Grid.Column="2"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"/>
+                    </Viewbox>
                 </Grid>
             </Border>
         </Grid>
-        <Grid Name="gridItems"  Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="20,20,20,20">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
 
-            <Grid Name="wrapItems" Background="#0f127b" Visibility="Hidden">
-                <TextBlock Text="Items"
-           Foreground="Purple" 
-           FontWeight="Bold" 
-           FontSize="48"
-           Grid.Row="0"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"/>
-            </Grid>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1" VerticalScrollBarVisibility="Disabled">
-                <WrapPanel Name="wrapBasic" Background="#0f127b" Visibility="Hidden" Orientation="Horizontal" ScrollViewer.CanContentScroll="True" >
+        
+        <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="20,20,20,20">
+           
+                <Grid Name="wrapItems" Background="#0f127b" Visibility="Hidden">
+                <Viewbox>
+                    <TextBlock 
+                           Text="Items"
+                           Foreground="Purple" 
+                           FontWeight="Bold" 
+                           FontSize="24"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           />
+                </Viewbox>
+                </Grid>
+            
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <WrapPanel Name="wrapBasic" Background="#0f127b" Visibility="Hidden">
                 </WrapPanel>
             </ScrollViewer>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="2" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <WrapPanel Name="wrapAdvanced" Background="#0f127b" Visibility="Hidden">
                 </WrapPanel>
             </ScrollViewer>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="3" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <WrapPanel Name="wrapMining" Background="#0f127b" Visibility="Hidden">
                 </WrapPanel>
             </ScrollViewer>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="4" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <WrapPanel Name="wrapQuantum" Background="#0f127b" Visibility="Hidden">
                 </WrapPanel>
             </ScrollViewer>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="5" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <WrapPanel Name="wrapClock" Background="#0f127b" Visibility="Hidden">
                 </WrapPanel>
             </ScrollViewer>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="6" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <WrapPanel Name="wrapCooling" Background="#0f127b" Visibility="Hidden">
                 </WrapPanel>
             </ScrollViewer>
@@ -497,9 +581,10 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                 </WrapPanel>
             </ScrollViewer>
 
-        </Grid>
+        <!--</Grid>-->
+    </StackPanel>
 
-        
-        
+
+
     </Grid>
 </Window>
