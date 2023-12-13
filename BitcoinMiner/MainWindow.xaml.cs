@@ -32,7 +32,8 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 200000000;
+        double aantalBTC = 0;
+        double aantalBTCooit = 0;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -78,6 +79,7 @@ namespace BitcoinMiner
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
+            ShowStoreItemsBasedOnBTC();
 
             elapsedTimeInSeconds = stopwatch.ElapsedMilliseconds / 1000.0;
             stopwatch.Restart();
@@ -88,6 +90,7 @@ namespace BitcoinMiner
 
             //update totale BTC adhv passief inkomen
             aantalBTC += (passiefTotaal * elapsedTimeInSeconds);
+            aantalBTCooit += (passiefTotaal * elapsedTimeInSeconds);
 
             //update totale BTC in shop en titel
             WeergaveCijfer();
@@ -133,7 +136,7 @@ namespace BitcoinMiner
                 TxtAantalBTC.Content = $"{tempBTC:f3} Million";
                 this.Title = $"You have {tempBTC:f3} Million BTC";
             }
-            else if (aantalBTC <1000000)
+            else if (aantalBTC < 1000000)
             {
                 NumberFormatInfo formatInfo = new NumberFormatInfo
                 {
@@ -153,7 +156,8 @@ namespace BitcoinMiner
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ImgBTC.Height = 230;
-            aantalBTC+= 1;
+            aantalBTC += 1;
+            aantalBTCooit += 1;
         }
         private void ImgBTC_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -165,6 +169,40 @@ namespace BitcoinMiner
             ImgBTC.Height = 210;
         }
         #endregion
+
+        private void ShowStoreItemsBasedOnBTC()
+        {
+            if (aantalBTCooit < 15)
+            {
+                GridBasic.Opacity = 0;
+            }
+            if (aantalBTCooit < 100)
+            {
+                GridAdvanced.Opacity = 0;
+            }
+            if (aantalBTCooit < 1100)
+            {
+                GridMiningRig.Opacity = 0;
+            }
+            if (aantalBTCooit < 12000)
+            {
+                GridQuantum.Opacity = 0;
+            }
+            if (aantalBTCooit < 130000)
+            {
+                GridClock.Opacity = 0;
+            }
+            if (aantalBTCooit < 1400000)
+            {
+                GridCooling.Opacity = 0;
+            }
+            if (aantalBTCooit < 20000000)
+            {
+                GridSecurity.Opacity = 0;
+            }
+
+
+        }
         private void CheckStoreAvailability()
         {
             if (aantalBTC >= prijsBasic)
@@ -256,6 +294,8 @@ namespace BitcoinMiner
                 BorderSecurity.BorderThickness = new Thickness(0);
             }
         }
+
+
 
         private void TekstGamification()
         {
@@ -533,6 +573,7 @@ namespace BitcoinMiner
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            ShowStoreItemsBasedOnBTC();
             TooltipLoad();
             Timer_ms_Load();
         }
@@ -626,8 +667,8 @@ namespace BitcoinMiner
         {
             Image basic = new Image();
             basic.Source = new BitmapImage(new Uri(@"Media/basicMiner.png", UriKind.RelativeOrAbsolute));
-            basic.Height = 70;
             basic.Margin = new Thickness(2);
+
             wrapBasic.Children.Add(basic);
             wrapBasic.Visibility = Visibility.Visible;
             wrapItems.Visibility = Visibility.Visible;
@@ -697,6 +738,7 @@ namespace BitcoinMiner
 
 
         #endregion
+
 
     }
 }
