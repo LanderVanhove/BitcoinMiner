@@ -32,8 +32,8 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 0;
-        double aantalBTCooit = 0;
+        double aantalBTC = 50000000;
+        double aantalBTCooit = 50000000;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -294,9 +294,6 @@ namespace BitcoinMiner
                 BorderSecurity.BorderThickness = new Thickness(0);
             }
         }
-
-
-
         private void TekstGamification()
         {
             if (passiefTotaal >= 100 )
@@ -667,6 +664,7 @@ namespace BitcoinMiner
         {
             Image basic = new Image();
             basic.Source = new BitmapImage(new Uri(@"Media/basicMiner.png", UriKind.RelativeOrAbsolute));
+            basic.Height = 70;
             basic.Margin = new Thickness(2);
 
             wrapBasic.Children.Add(basic);

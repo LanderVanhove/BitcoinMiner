@@ -138,7 +138,7 @@
                 </Viewbox>
             </Grid>
 
-            <Grid 
+            <Grid Name="Shop" 
             Grid.Column="2" 
             Grid.RowSpan="3" 
             Margin="20,20,20,20" 
@@ -546,64 +546,72 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                 </Border>
             </Grid>
 
+            <Grid Name="wrapItems"             
+            Grid.Column="1" 
+            Grid.RowSpan="3" 
+            Margin="20,20,20,20" 
+            MaxWidth="400"
+            Background="#001969">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
 
-            <Grid Name="wrapItems" Background="#0f127b" Visibility="Visible"
-                  Grid.Column="1" Margin="20,20,20,0">
+                </Grid.RowDefinitions>
                 <Viewbox>
                     <TextBlock 
                            Text="Items"
                            Foreground="Purple" 
                            FontWeight="Bold" 
-                           FontSize="24"
+                           FontSize="48"
                            HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
+                           VerticalAlignment="Center"
+                           Grid.Row="0"/>
                 </Viewbox>
-            </Grid>
 
-            <Viewbox Grid.Column="1" Grid.Row="1" Margin="20,0,20,20" VerticalAlignment="Top">
-                <StackPanel>
 
-                    <Viewbox>
-                        <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                            <WrapPanel Name="wrapBasic" Background="#0f127b" Visibility="Hidden">
-                            </WrapPanel>
-                        </ScrollViewer>
-                    </Viewbox>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                         <WrapPanel Height="100" Name="wrapBasic" Background="#0f127b" Visibility="Visible">
+                         </WrapPanel>
+                    </ScrollViewer>
+
+                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                         <WrapPanel Name="wrapAdvanced" Background="#0f127b" Visibility="Hidden">
                         </WrapPanel>
                     </ScrollViewer>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                         <WrapPanel Name="wrapMining" Background="#0f127b" Visibility="Hidden">
                         </WrapPanel>
                     </ScrollViewer>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                         <WrapPanel Name="wrapQuantum" Background="#0f127b" Visibility="Hidden">
                         </WrapPanel>
                     </ScrollViewer>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                         <WrapPanel Name="wrapClock" Background="#0f127b" Visibility="Hidden">
                         </WrapPanel>
                     </ScrollViewer>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="6" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                         <WrapPanel Name="wrapCooling" Background="#0f127b" Visibility="Hidden">
                         </WrapPanel>
                     </ScrollViewer>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="7" VerticalScrollBarVisibility="Disabled">
-                        <WrapPanel Name="wrapSecurity" Background="#0f127b" Visibility="Hidden">
-                        </WrapPanel>
-                    </ScrollViewer>
+                <ScrollViewer Grid.Row="7" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <WrapPanel Name="wrapSecurity" Background="#0f127b" Visibility="Hidden">
+                    </WrapPanel>
+                </ScrollViewer>
 
-                    <!--</Grid>-->
-                </StackPanel>
-
-            </Viewbox>
+            </Grid>
 
 
         </Grid>
