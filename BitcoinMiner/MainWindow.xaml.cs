@@ -32,8 +32,8 @@ namespace BitcoinMiner
             InitializeComponent();
         }
 
-        double aantalBTC = 50000000;
-        double aantalBTCooit = 50000000;
+        double aantalBTC = 0;
+        double aantalBTCooit = 0;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -53,6 +53,15 @@ namespace BitcoinMiner
         double aantalCooler = 0;
         double aantalSecurity = 0;
 
+        //aantal bonus shopitems de klikker heeft
+        double aantalBonusBasic = 1;
+        double aantalBonusAdvanced = 1;
+        double aantalBonusMiningRig = 1;
+        double aantalBonusQuantum = 1;
+        double aantalBonusClock = 1;
+        double aantalBonusCooler = 1;
+        double aantalBonusSecurity = 1;
+
         //passief inkomen dat er bekomen in
         double passiefBasic = 0;
         double passiefAdvanced = 0;
@@ -63,6 +72,14 @@ namespace BitcoinMiner
         double passiefSecurity = 0;
         double passiefTotaal = 0;
 
+        //prijs van elk Bonusshop item
+        double prijsBonusBasic = 1500;
+        double prijsBonusAdvanced = 10000;
+        double prijsBonusMiningRig = 110000;
+        double prijsBonusQuantum = 1200000;
+        double prijsBonusClock = 13000000;
+        double prijsBonusCooler = 140000000;
+        double prijsBonusSecurity = 2000000000;
 
         DispatcherTimer timer_ms = new DispatcherTimer();
 
@@ -79,6 +96,7 @@ namespace BitcoinMiner
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
+            CheckBonusStoreAvailability();
             ShowStoreItemsBasedOnBTC();
 
             elapsedTimeInSeconds = stopwatch.ElapsedMilliseconds / 1000.0;
@@ -175,30 +193,44 @@ namespace BitcoinMiner
             if (aantalBTCooit < 15)
             {
                 GridBasic.Opacity = 0;
+                GridBonusBasic.Opacity = 0;
+                BasicMultiplier.Opacity = 0;
             }
             if (aantalBTCooit < 100)
             {
                 GridAdvanced.Opacity = 0;
+                GridBonusAdvanced.Opacity = 0;
+                AdvancedMultiplier.Opacity = 0;
             }
             if (aantalBTCooit < 1100)
             {
                 GridMiningRig.Opacity = 0;
+                GridBonusMining.Opacity = 0;
+                MiningMultiplier.Opacity = 0;
             }
             if (aantalBTCooit < 12000)
             {
                 GridQuantum.Opacity = 0;
+                GridBonusQuantum.Opacity = 0;
+                QuantumMultiplier.Opacity = 0;
             }
             if (aantalBTCooit < 130000)
             {
                 GridClock.Opacity = 0;
+                GridBonusClock.Opacity = 0;
+                ClockMultiplier.Opacity = 0;
             }
             if (aantalBTCooit < 1400000)
             {
                 GridCooling.Opacity = 0;
+                GridBonusCooling.Opacity = 0;
+                CoolingMultiplier.Opacity = 0;
             }
             if (aantalBTCooit < 20000000)
             {
                 GridSecurity.Opacity = 0;
+                GridBonusSecurity.Opacity = 0;
+                SecurityMultiplier.Opacity = 0;
             }
 
 
@@ -293,34 +325,103 @@ namespace BitcoinMiner
                 GridSecurity.IsEnabled = false;
                 BorderSecurity.BorderThickness = new Thickness(0);
             }
+            if (aantalBTC >= prijsBonusBasic)
+            {
+                GridBonusBasic.Opacity = 1;
+                GridBonusBasic.IsEnabled = true;
+                BorderBonusBasic.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridBonusBasic.Opacity = 0.3;
+                GridBonusBasic.IsEnabled = false;
+                BorderBonusBasic.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsBonusAdvanced)
+            {
+                GridBonusAdvanced.Opacity = 1;
+                GridBonusAdvanced.IsEnabled = true;
+                BorderBonusAdvanced.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridBonusAdvanced.Opacity = 0.3;
+                GridBonusAdvanced.IsEnabled = false;
+                BorderBonusAdvanced.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsBonusMiningRig)
+            {
+                GridBonusMining.Opacity = 1;
+                GridBonusMining.IsEnabled = true;
+                BorderBonusMining.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridBonusMining.Opacity = 0.3;
+                GridBonusMining.IsEnabled = false;
+                BorderBonusMining.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsBonusQuantum)
+            {
+                GridBonusQuantum.Opacity = 1;
+                GridBonusQuantum.IsEnabled = true;
+                BorderBonusQuantum.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridBonusQuantum.Opacity = 0.3;
+                GridBonusQuantum.IsEnabled = false;
+                BorderBonusQuantum.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsBonusClock)
+            {
+                GridBonusClock.Opacity = 1;
+                GridBonusClock.IsEnabled = true;
+                BorderBonusClock.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridBonusClock.Opacity = 0.3;
+                GridBonusClock.IsEnabled = false;
+                BorderBonusClock.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsBonusCooler)
+            {
+                GridBonusCooling.Opacity = 1;
+                GridBonusCooling.IsEnabled = true;
+                BorderBonusCooling.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridBonusCooling.Opacity = 0.3;
+                GridBonusCooling.IsEnabled = false;
+                BorderBonusCooling.BorderThickness = new Thickness(0);
+            }
+            if (aantalBTC >= prijsBonusSecurity)
+            {
+                GridBonusSecurity.Opacity = 1;
+                GridBonusSecurity.IsEnabled = true;
+                BorderBonusSecurity.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                GridBonusSecurity.Opacity = 0.3;
+                GridBonusSecurity.IsEnabled = false;
+                BorderBonusSecurity.BorderThickness = new Thickness(0);
+            }
+
+
+
         }
-        private void TekstGamification()
+
+        private void CheckBonusStoreAvailability()
         {
-            if (passiefTotaal >= 100 )
+            if (aantalBTCooit >= 15)
             {
-                TxtAantalBTC.FontSize = 36;
-                TxtBTC.FontSize = 36;
+                DpMenu.Visibility = Visibility.Visible;
+
             }
-            else if (passiefTotaal >= 50)
-            {
-                TxtAantalBTC.FontSize = 32;
-                TxtBTC.FontSize = 32;
-            }
-            else if (passiefTotaal >= 25)
-            {
-                TxtAantalBTC.FontSize = 28;
-                TxtBTC.FontSize = 28;
-            }
-            else if (passiefTotaal >= 10)
-            {
-                TxtAantalBTC.FontSize = 24;
-                TxtBTC.FontSize = 24;
-            }
-            else if (passiefTotaal >= 1)
-            {
-                TxtAantalBTC.FontSize = 20;
-                TxtBTC.FontSize = 20;
-            }
+
         }
 
         #region Shopitems click events
@@ -485,6 +586,159 @@ namespace BitcoinMiner
             SecurityTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
             SecurityTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
         }
+        private void GridBonusBasic_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsBonusBasic;
+            prijsBonusBasic++;
+            aantalBonusBasic *= 2;
+            TxtAantalBonusBasic.Content = $"x{aantalBonusBasic}";
+            TxtPrijsBonusBasic.Content = $"{Math.Ceiling(prijsBonusBasic)} BTC";
+
+            passiefBasic *= 2;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BonusBasicTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BonusBasicTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BonusBasicTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BonusBasicTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridBonusAdvanced_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsBonusAdvanced;
+            prijsBonusAdvanced++;
+            aantalBonusAdvanced *= 2;
+            TxtAantalBonusAdvanced.Content = $"x{aantalBonusAdvanced}";
+            TxtPrijsBonusAdvanced.Content = $"{Math.Ceiling(prijsBonusAdvanced)} BTC";
+
+            passiefAdvanced *= 2;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BonusAdvancedTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BonusAdvancedTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BonusAdvancedTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BonusAdvancedTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridBonusMining_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsBonusMiningRig;
+            prijsBonusMiningRig++;
+            aantalBonusMiningRig *= 2;
+            TxtAantalBonusMining.Content = $"x{aantalBonusMiningRig}";
+            TxtPrijsBonusMining.Content = $"{Math.Ceiling(prijsBonusMiningRig)} BTC";
+
+            passiefMiningRig *= 2;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BonusMiningTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BonusMiningTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BonusMiningTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BonusMiningTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridBonusQuantum_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsBonusQuantum;
+            prijsBonusQuantum++;
+            aantalBonusQuantum *= 2;
+            TxtAantalBonusQuantum.Content = $"x{aantalBonusQuantum}";
+            TxtPrijsBonusQuantum.Content = $"{Math.Ceiling(prijsBonusQuantum)} BTC";
+
+            passiefQuantum *= 2;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BonusQuantumTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BonusQuantumTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BonusQuantumTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BonusQuantumTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridBonusClock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsBonusClock;
+            prijsBonusClock++;
+            aantalBonusClock *= 2;
+            TxtAantalBonusClock.Content = $"x{aantalBonusClock}";
+            TxtPrijsBonusClock.Content = $"{Math.Ceiling(prijsBonusClock)} BTC";
+
+            passiefClock *= 2;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BonusClockTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BonusClockTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BonusClockTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BonusClockTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridBonusCooling_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsBonusCooler;
+            prijsBonusCooler++;
+            aantalBonusCooler *= 2;
+            TxtAantalBonusCooling.Content = $"x{aantalBonusCooler}";
+            TxtPrijsBonusCooling.Content = $"{Math.Ceiling(prijsBonusCooler)} BTC";
+
+            passiefClock *= 2;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BonusCoolingTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BonusCoolingTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BonusCoolingTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BonusCoolingTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
+
+        private void GridBonusSecurity_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            aantalBTC -= prijsBonusSecurity;
+            prijsBonusSecurity++;
+            aantalBonusSecurity *= 2;
+            TxtAantalBonusSecurity.Content = $"x{aantalBonusSecurity}";
+            TxtPrijsBonusSecurity.Content = $"{Math.Ceiling(prijsBonusSecurity)} BTC";
+
+            passiefSecurity *= 2;
+
+            DoubleAnimation zoom = new DoubleAnimation
+            {
+                To = 1.05,
+                Duration = TimeSpan.FromMilliseconds(100),
+                AutoReverse = true,
+            };
+            BonusSecurityTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            BonusSecurityTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            BonusSecurityTransform.BeginAnimation(ScaleTransform.ScaleXProperty, zoom);
+            BonusSecurityTransform.BeginAnimation(ScaleTransform.ScaleYProperty, zoom);
+        }
         #endregion
 
         #region Mouse events to change BG
@@ -566,6 +820,82 @@ namespace BitcoinMiner
             GridSecurity.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
 
         }
+
+        private void GridBonusBasic_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridBonusBasic.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+        }
+
+        private void GridBonusBasic_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridBonusBasic.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+        }
+        private void GridBonusAdvanced_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridBonusAdvanced.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridBonusAdvanced_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridBonusAdvanced.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
+        private void GridBonusMining_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridBonusMining.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridBonusMining_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridBonusMining.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
+        private void GridBonusQuantum_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridBonusQuantum.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridBonusQuantum_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridBonusQuantum.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
+        private void GridBonusClock_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridBonusClock.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridBonusClock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridBonusClock.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
+        private void GridBonusCooling_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridBonusCooling.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridBonusCooling_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridBonusCooling.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
+        private void GridBonusSecurity_MouseEnter(object sender, MouseEventArgs e)
+        {
+            GridBonusSecurity.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
+
+        }
+
+        private void GridBonusSecurity_MouseLeave(object sender, MouseEventArgs e)
+        {
+            GridBonusSecurity.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
+
+        }
         #endregion
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -617,8 +947,6 @@ namespace BitcoinMiner
             sbSecurity.AppendLine("Every Security Protocol will provide a passive income of 7800 BTC every second");
             TTsecurity.Content = sbSecurity.ToString();
             GridSecurity.ToolTip = sbSecurity;
-
-
 
         }
 
@@ -735,8 +1063,23 @@ namespace BitcoinMiner
         }
 
 
+
+
+
+
+
         #endregion
 
+        private void BonusShop_Click(object sender, RoutedEventArgs e)
+        {
+            Shop.Visibility = Visibility.Hidden;
+            BonusShopList.Visibility = Visibility.Visible;
+        }
 
+        private void ShopList_Click(object sender, RoutedEventArgs e)
+        {
+            BonusShopList.Visibility = Visibility.Hidden;
+            Shop.Visibility = Visibility.Visible;
+        }
     }
 }
