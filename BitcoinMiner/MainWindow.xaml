@@ -12,7 +12,7 @@
         </Style>
     </Window.Resources>
     <DockPanel Background="Purple">
-        <Menu x:Name="DpMenu" Visibility="Visible" Height="50" DockPanel.Dock="Top" Background="LightBlue" BorderBrush="Beige" BorderThickness="5" FontFamily="bahnschrift" HorizontalAlignment="Center">
+        <Menu x:Name="DpMenu" Visibility="Collapsed" Height="50" DockPanel.Dock="Top" Background="LightBlue" BorderBrush="Beige" BorderThickness="5" FontFamily="bahnschrift" HorizontalAlignment="Center">
             <Viewbox HorizontalAlignment="Center">
                 <WrapPanel>
                     <MenuItem Name="ShopList" Header="Shop" Visibility="Visible" Click="ShopList_Click">
@@ -178,7 +178,7 @@
                     >
                     <Grid 
                     Name="GridBasic"
-                    Opacity="0.3" 
+                    Opacity="0.3"
                     MouseDown="GridBasic_MouseDown" MouseEnter="GridBasic_MouseEnter" MouseLeave="GridBasic_MouseLeave">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -648,7 +648,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                                 <Label  Content="Income multiplier!" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                             <Viewbox Grid.Row="1">
-                                <Label Name="TxtPrijsBonusAdvanced" Content="Cost: 1500" Foreground="#00acd1" FontSize="26"/>
+                                <Label Name="TxtPrijsBonusAdvanced" Content="Cost: 10000" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                         </Grid>
                         <Viewbox Grid.Column="2">
@@ -676,7 +676,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                                 <Label  Content="Income multiplier!" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                             <Viewbox Grid.Row="1">
-                                <Label Name="TxtPrijsBonusMining" Content="Cost: 1500" Foreground="#00acd1" FontSize="26"/>
+                                <Label Name="TxtPrijsBonusMining" Content="Cost: 110000" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                         </Grid>
                         <Viewbox Grid.Column="2">
@@ -704,7 +704,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                                 <Label  Content="Income multiplier!" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                             <Viewbox Grid.Row="1">
-                                <Label Name="TxtPrijsBonusQuantum" Content="Cost: 1500" Foreground="#00acd1" FontSize="26"/>
+                                <Label Name="TxtPrijsBonusQuantum" Content="Cost: 1200000" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                         </Grid>
                         <Viewbox Grid.Column="2">
@@ -732,7 +732,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                                 <Label  Content="Income multiplier!" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                             <Viewbox Grid.Row="1">
-                                <Label Name="TxtPrijsBonusClock" Content="Cost: 1500" Foreground="#00acd1" FontSize="26"/>
+                                <Label Name="TxtPrijsBonusClock" Content="Cost: 13000000" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                         </Grid>
                         <Viewbox Grid.Column="2">
@@ -760,7 +760,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                                 <Label  Content="Income multiplier!" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                             <Viewbox Grid.Row="1">
-                                <Label Name="TxtPrijsBonusCooling" Content="Cost: 1500" Foreground="#00acd1" FontSize="26"/>
+                                <Label Name="TxtPrijsBonusCooling" Content="Cost: 140000000" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                         </Grid>
                         <Viewbox Grid.Column="2">
@@ -788,7 +788,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                                 <Label  Content="Income multiplier!" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                             <Viewbox Grid.Row="1">
-                                <Label Name="TxtPrijsBonusSecurity" Content="Cost: 1500" Foreground="#00acd1" FontSize="26"/>
+                                <Label Name="TxtPrijsBonusSecurity" Content="Cost: 2000000000" Foreground="#00acd1" FontSize="26"/>
                             </Viewbox>
                         </Grid>
                         <Viewbox Grid.Column="2">
@@ -798,7 +798,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                 </Border>
             </Grid>
 
-            <Grid Name="wrapItems"             
+            <Grid Name="WrapItems"             
             Grid.Column="1" 
             Grid.RowSpan="3" 
             Margin="20,20,20,20" 

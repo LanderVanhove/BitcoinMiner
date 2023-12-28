@@ -62,6 +62,7 @@ namespace BitcoinMiner
         double aantalBonusCooler = 1;
         double aantalBonusSecurity = 1;
 
+
         //passief inkomen dat er bekomen in
         double passiefBasic = 0;
         double passiefAdvanced = 0;
@@ -80,6 +81,30 @@ namespace BitcoinMiner
         double prijsBonusClock = 13000000;
         double prijsBonusCooler = 140000000;
         double prijsBonusSecurity = 2000000000;
+
+        double[] bonusPrijzen = new double[7] {1500, 10000, 110000, 1200000, 13000000, 140000000, 2000000000};
+
+        private void BonusStorePrijzen(double item, int x)
+        {
+            if (item == 1)
+            {
+                bonusPrijzen[x] *= 5;
+            }
+            else
+            {
+                bonusPrijzen[x] *= 10;
+            }
+        }
+        private void BonusPrijzenUpdaten()
+        {
+             prijsBonusBasic = bonusPrijzen[0];
+             prijsBonusAdvanced = bonusPrijzen[1];
+             prijsBonusMiningRig = bonusPrijzen[2];
+             prijsBonusQuantum = bonusPrijzen[3];
+             prijsBonusClock = bonusPrijzen[4];
+             prijsBonusCooler = bonusPrijzen[5];
+             prijsBonusSecurity = bonusPrijzen[6];
+        }
 
         DispatcherTimer timer_ms = new DispatcherTimer();
 
@@ -232,7 +257,10 @@ namespace BitcoinMiner
                 GridBonusSecurity.Opacity = 0;
                 SecurityMultiplier.Opacity = 0;
             }
-
+            if (aantalBTCooit > 14)
+            {
+                Shop.Visibility = Visibility.Visible;
+            }
 
         }
         private void CheckStoreAvailability()
@@ -434,7 +462,7 @@ namespace BitcoinMiner
             TxtAantalBasic.Content = (int)aantalBasic;
             TxtprijsBasic.Content = $"{Math.Ceiling(prijsBasic)} BTC";
 
-            passiefBasic += 0.1;
+            passiefBasic += (0.1 * aantalBonusBasic);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -457,7 +485,7 @@ namespace BitcoinMiner
             TxtAantalAdvanced.Content = (int)aantalAdvanced;
             TxtprijsAdvanced.Content = $"{Math.Ceiling(prijsAdvanced)} BTC";
 
-            passiefAdvanced += 1;
+            passiefAdvanced += (1 * aantalBonusAdvanced);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -481,7 +509,7 @@ namespace BitcoinMiner
             TxtAantalMiningRig.Content = (int)aantalMiningRig;
             TxtprijsMiningRig.Content = $"{Math.Ceiling(prijsMiningRig)} BTC";
 
-            passiefMiningRig += 8;
+            passiefMiningRig += (8 * aantalBonusMiningRig);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -504,7 +532,7 @@ namespace BitcoinMiner
             TxtAantalQuantum.Content = (int)aantalQuantum;
             TxtprijsQuantum.Content = $"{Math.Ceiling(prijsQuantum)} BTC";
 
-            passiefQuantum += 47;
+            passiefQuantum += (47 * aantalBonusQuantum);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -527,7 +555,7 @@ namespace BitcoinMiner
             TxtAantalClock.Content = (int)aantalClock;
             TxtPrijsClock.Content = $"{Math.Ceiling(prijsClock)} BTC";
 
-            passiefClock += 260;
+            passiefClock += (260 * aantalBonusClock);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -550,7 +578,7 @@ namespace BitcoinMiner
             TxtAantalCooling.Content = (int)aantalCooler;
             TxtPrijsCooling.Content = $"{Math.Ceiling(prijsCooler)} BTC";
 
-            passiefClock += 1400;
+            passiefClock += (1400 * aantalBonusCooler);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -573,7 +601,7 @@ namespace BitcoinMiner
             TxtAantalSecurity.Content = (int)aantalSecurity;
             TxtPrijsSecurity.Content = $"{Math.Ceiling(prijsSecurity)} BTC";
 
-            passiefSecurity += 1400;
+            passiefSecurity += (1400 * aantalBonusSecurity);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -589,10 +617,12 @@ namespace BitcoinMiner
         private void GridBonusBasic_MouseDown(object sender, MouseButtonEventArgs e)
         {
             aantalBTC -= prijsBonusBasic;
-            prijsBonusBasic++;
+            BonusStorePrijzen(aantalBonusBasic, 0);
+            BonusPrijzenUpdaten();
             aantalBonusBasic *= 2;
             TxtAantalBonusBasic.Content = $"x{aantalBonusBasic}";
-            TxtPrijsBonusBasic.Content = $"{Math.Ceiling(prijsBonusBasic)} BTC";
+            BasicMultiplier.Text = $"x{aantalBonusBasic}";
+            TxtPrijsBonusBasic.Content = $"Cost: {Math.Ceiling(prijsBonusBasic)}";
 
             passiefBasic *= 2;
 
@@ -611,9 +641,11 @@ namespace BitcoinMiner
         private void GridBonusAdvanced_MouseDown(object sender, MouseButtonEventArgs e)
         {
             aantalBTC -= prijsBonusAdvanced;
-            prijsBonusAdvanced++;
+            BonusStorePrijzen(aantalBonusAdvanced, 1);
+            BonusPrijzenUpdaten();
             aantalBonusAdvanced *= 2;
             TxtAantalBonusAdvanced.Content = $"x{aantalBonusAdvanced}";
+            AdvancedMultiplier.Text = $"x{aantalBonusAdvanced}";
             TxtPrijsBonusAdvanced.Content = $"{Math.Ceiling(prijsBonusAdvanced)} BTC";
 
             passiefAdvanced *= 2;
@@ -633,9 +665,11 @@ namespace BitcoinMiner
         private void GridBonusMining_MouseDown(object sender, MouseButtonEventArgs e)
         {
             aantalBTC -= prijsBonusMiningRig;
-            prijsBonusMiningRig++;
+            BonusStorePrijzen(aantalBonusMiningRig, 2);
+            BonusPrijzenUpdaten();
             aantalBonusMiningRig *= 2;
             TxtAantalBonusMining.Content = $"x{aantalBonusMiningRig}";
+            MiningMultiplier.Text = $"x{aantalBonusMiningRig}";
             TxtPrijsBonusMining.Content = $"{Math.Ceiling(prijsBonusMiningRig)} BTC";
 
             passiefMiningRig *= 2;
@@ -655,9 +689,11 @@ namespace BitcoinMiner
         private void GridBonusQuantum_MouseDown(object sender, MouseButtonEventArgs e)
         {
             aantalBTC -= prijsBonusQuantum;
-            prijsBonusQuantum++;
+            BonusStorePrijzen(aantalBonusQuantum, 3);
+            BonusPrijzenUpdaten();
             aantalBonusQuantum *= 2;
             TxtAantalBonusQuantum.Content = $"x{aantalBonusQuantum}";
+            QuantumMultiplier.Text = $"x{aantalBonusQuantum}";
             TxtPrijsBonusQuantum.Content = $"{Math.Ceiling(prijsBonusQuantum)} BTC";
 
             passiefQuantum *= 2;
@@ -677,9 +713,11 @@ namespace BitcoinMiner
         private void GridBonusClock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             aantalBTC -= prijsBonusClock;
-            prijsBonusClock++;
+            BonusStorePrijzen(aantalBonusClock, 4);
+            BonusPrijzenUpdaten();
             aantalBonusClock *= 2;
             TxtAantalBonusClock.Content = $"x{aantalBonusClock}";
+            ClockMultiplier.Text = $"x{aantalBonusClock}";
             TxtPrijsBonusClock.Content = $"{Math.Ceiling(prijsBonusClock)} BTC";
 
             passiefClock *= 2;
@@ -699,9 +737,11 @@ namespace BitcoinMiner
         private void GridBonusCooling_MouseDown(object sender, MouseButtonEventArgs e)
         {
             aantalBTC -= prijsBonusCooler;
-            prijsBonusCooler++;
+            BonusStorePrijzen(aantalBonusCooler, 5);
+            BonusPrijzenUpdaten();
             aantalBonusCooler *= 2;
             TxtAantalBonusCooling.Content = $"x{aantalBonusCooler}";
+            CoolingMultiplier.Text = $"x{aantalBonusCooler}";
             TxtPrijsBonusCooling.Content = $"{Math.Ceiling(prijsBonusCooler)} BTC";
 
             passiefClock *= 2;
@@ -721,9 +761,11 @@ namespace BitcoinMiner
         private void GridBonusSecurity_MouseDown(object sender, MouseButtonEventArgs e)
         {
             aantalBTC -= prijsBonusSecurity;
-            prijsBonusSecurity++;
+            BonusStorePrijzen(aantalBonusSecurity, 6);
+            BonusPrijzenUpdaten();
             aantalBonusSecurity *= 2;
             TxtAantalBonusSecurity.Content = $"x{aantalBonusSecurity}";
+            SecurityMultiplier.Text = $"x{aantalBonusSecurity}";
             TxtPrijsBonusSecurity.Content = $"{Math.Ceiling(prijsBonusSecurity)} BTC";
 
             passiefSecurity *= 2;
@@ -903,6 +945,8 @@ namespace BitcoinMiner
             ShowStoreItemsBasedOnBTC();
             TooltipLoad();
             Timer_ms_Load();
+            WrapItems.Visibility = Visibility.Collapsed;
+            Shop.Visibility = Visibility.Collapsed;
         }
         private void TooltipLoad()
         {
@@ -997,7 +1041,7 @@ namespace BitcoinMiner
 
             wrapBasic.Children.Add(basic);
             wrapBasic.Visibility = Visibility.Visible;
-            wrapItems.Visibility = Visibility.Visible;
+            WrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenAdvanced()
         {
@@ -1007,7 +1051,7 @@ namespace BitcoinMiner
             advanced.Margin = new Thickness(2);
             wrapAdvanced.Children.Add(advanced);
             wrapAdvanced.Visibility = Visibility.Visible;
-            wrapItems.Visibility = Visibility.Visible;
+            WrapItems.Visibility = Visibility.Visible;
 
         }
 
@@ -1019,7 +1063,7 @@ namespace BitcoinMiner
             mining.Margin = new Thickness(2);
             wrapMining.Children.Add(mining);
             wrapMining.Visibility = Visibility.Visible;
-            wrapItems.Visibility = Visibility.Visible;
+            WrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenQuantum()
         {
@@ -1029,7 +1073,7 @@ namespace BitcoinMiner
             quantum.Margin = new Thickness(2);
             wrapQuantum.Children.Add(quantum);
             wrapQuantum.Visibility = Visibility.Visible;
-            wrapItems.Visibility = Visibility.Visible;
+            WrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenClock()
         {
@@ -1039,7 +1083,7 @@ namespace BitcoinMiner
             Clock.Margin = new Thickness(2);
             wrapClock.Children.Add(Clock);
             wrapClock.Visibility = Visibility.Visible;
-            wrapItems.Visibility = Visibility.Visible;
+            WrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenCooling()
         {
@@ -1049,7 +1093,7 @@ namespace BitcoinMiner
             cooling.Margin = new Thickness(2);
             wrapCooling.Children.Add(cooling);
             wrapCooling.Visibility = Visibility.Visible;
-            wrapItems.Visibility = Visibility.Visible;
+            WrapItems.Visibility = Visibility.Visible;
         }
         private void ToevoegenSecurity()
         {
@@ -1059,7 +1103,7 @@ namespace BitcoinMiner
             security.Margin = new Thickness(2);
             wrapSecurity.Children.Add(security);
             wrapSecurity.Visibility = Visibility.Visible;
-            wrapItems.Visibility = Visibility.Visible;
+            WrapItems.Visibility = Visibility.Visible;
         }
 
 
@@ -1070,6 +1114,7 @@ namespace BitcoinMiner
 
         #endregion
 
+        #region Menu items
         private void BonusShop_Click(object sender, RoutedEventArgs e)
         {
             Shop.Visibility = Visibility.Hidden;
@@ -1081,5 +1126,7 @@ namespace BitcoinMiner
             BonusShopList.Visibility = Visibility.Hidden;
             Shop.Visibility = Visibility.Visible;
         }
+        #endregion
+
     }
 }
