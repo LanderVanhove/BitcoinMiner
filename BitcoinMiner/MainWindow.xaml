@@ -865,7 +865,9 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
 
             </Grid>
 
-
+            <Canvas Visibility="Collapsed" Name="CanvasGoldenBTC" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" >
+                
+            </Canvas>
         </Grid>
     </DockPanel>
 </Window>

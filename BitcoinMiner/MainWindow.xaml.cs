@@ -82,7 +82,7 @@ namespace BitcoinMiner
         double prijsBonusCooler = 140000000;
         double prijsBonusSecurity = 2000000000;
 
-        double[] bonusPrijzen = new double[7] {1500, 10000, 110000, 1200000, 13000000, 140000000, 2000000000};
+        double[] bonusPrijzen = new double[7] { 1500, 10000, 110000, 1200000, 13000000, 140000000, 2000000000 };
 
         private void BonusStorePrijzen(double item, int x)
         {
@@ -97,16 +97,17 @@ namespace BitcoinMiner
         }
         private void BonusPrijzenUpdaten()
         {
-             prijsBonusBasic = bonusPrijzen[0];
-             prijsBonusAdvanced = bonusPrijzen[1];
-             prijsBonusMiningRig = bonusPrijzen[2];
-             prijsBonusQuantum = bonusPrijzen[3];
-             prijsBonusClock = bonusPrijzen[4];
-             prijsBonusCooler = bonusPrijzen[5];
-             prijsBonusSecurity = bonusPrijzen[6];
+            prijsBonusBasic = bonusPrijzen[0];
+            prijsBonusAdvanced = bonusPrijzen[1];
+            prijsBonusMiningRig = bonusPrijzen[2];
+            prijsBonusQuantum = bonusPrijzen[3];
+            prijsBonusClock = bonusPrijzen[4];
+            prijsBonusCooler = bonusPrijzen[5];
+            prijsBonusSecurity = bonusPrijzen[6];
         }
 
         DispatcherTimer timer_ms = new DispatcherTimer();
+        DispatcherTimer timer_minuut = new DispatcherTimer();
 
         private Stopwatch stopwatch = new Stopwatch();
         private double elapsedTimeInSeconds = 0;
@@ -117,7 +118,17 @@ namespace BitcoinMiner
             timer_ms.Interval = TimeSpan.FromMilliseconds(10);
             timer_ms.Tick += Timer_ms_Tick;
             timer_ms.Start();
+
+            timer_minuut.Interval = TimeSpan.FromMinutes(1);
+            timer_minuut.Tick += Timer_minuut_Tick;
+            timer_minuut.Start();
         }
+
+        private void Timer_minuut_Tick(object sender, EventArgs e)
+        {
+            RandomBTC();
+        }
+
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
@@ -1013,7 +1024,7 @@ namespace BitcoinMiner
                 MessageBox.Show("Please enter a name between 3 and 12 characters");
                 VraagNaam();
             }
-          
+
             else
             {
                 LblNaam.Content = $"{invoer}'s Mining Emperium";
@@ -1128,5 +1139,60 @@ namespace BitcoinMiner
         }
         #endregion
 
+        Random rand1 = new Random();
+        Random rand2 = new Random();
+
+        private void RandomBTC()
+        {
+            int nummer = rand2.Next(1, 11);
+            if (nummer == 1 || nummer == 2 || nummer == 3)
+            {
+                SpawnGoldenBTC();
+            }
+            
+        }
+        private void SpawnGoldenBTC()
+        {
+            CanvasGoldenBTC.Visibility = Visibility.Visible;
+            Image GoldBTC = new Image();
+            GoldBTC.Source = ImgBTC.Source;
+            GoldBTC.Height = ImgBTC.Height;
+            Canvas.SetTop(GoldBTC, -100);
+            int randomLeft = rand1.Next(0, 500);
+            Canvas.SetLeft(GoldBTC, randomLeft);
+            CanvasGoldenBTC.Children.Add(GoldBTC);
+            GoldBTC.MouseDown += GoldBTC_MouseDown;
+            AnimateImg(GoldBTC);
+            
+        }
+
+        private void GoldBTC_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            Image clickedImage = sender as Image;
+            aantalBTC += (passiefTotaal * 900);
+            aantalBTCooit += (passiefTotaal * 900);
+            CanvasGoldenBTC.Children.Remove(clickedImage);
+            CanvasGoldenBTC.Visibility = Visibility.Collapsed;
+
+
+        }
+
+        private async void AnimateImg(Image img)
+        {
+            while (Canvas.GetTop(img) < 1000)
+            {
+
+                Canvas.SetTop(img, Canvas.GetTop(img) + 5);
+                await Task.Delay(10);
+                if (Canvas.GetTop(img) > 800)
+                {
+                    CanvasGoldenBTC.Children.Remove(img);
+                    CanvasGoldenBTC.Visibility = Visibility.Collapsed;
+                }
+            }
+
+
+        }
     }
 }
