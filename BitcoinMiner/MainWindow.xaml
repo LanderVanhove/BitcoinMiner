@@ -12,7 +12,7 @@
         </Style>
     </Window.Resources>
     <DockPanel Background="Purple">
-        <Menu x:Name="DpMenu" Visibility="Collapsed" Height="50" DockPanel.Dock="Top" Background="LightBlue" BorderBrush="Beige" BorderThickness="5" FontFamily="bahnschrift" HorizontalAlignment="Center">
+        <Menu x:Name="DpMenu" Visibility="Collapsed" Height="50" DockPanel.Dock="Top" Background="LightBlue" BorderBrush="Beige" BorderThickness="5" FontFamily="bahnschrift" HorizontalAlignment="Center" MouseLeave="DpMenu_MouseLeave">
             <Viewbox HorizontalAlignment="Center">
                 <WrapPanel>
                     <MenuItem Name="ShopList" Header="Shop" Visibility="Visible" Click="ShopList_Click">
@@ -28,7 +28,7 @@
             </Viewbox>
 
         </Menu>
-        <Grid>
+        <Grid Name="masterGrid">
             <Grid.Background>
                 <ImageBrush ImageSource="Media/bg.png"/>
             </Grid.Background>
@@ -80,8 +80,7 @@
                 </Image>
             </Viewbox>
 
-            <Grid 
-            x:Name="gridMinerName"
+            <Grid x:Name="gridMinerName"
             Background="#0f127b" 
             Grid.Row="0"
             Grid.Column="0"
@@ -144,7 +143,7 @@
             Margin="20,20,20,20" 
             MaxWidth="400"
             Background="#001969"
-                  Visibility="Visible">
+                  Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -803,7 +802,8 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
             Grid.RowSpan="3" 
             Margin="20,20,20,20" 
             MaxWidth="400"
-            Background="#001969">
+            Background="#001969"
+            Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -865,9 +865,24 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
 
             </Grid>
 
+            <Grid Name="QuestGrid" Margin="20,20,20,20" Background="#001969" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <TextBlock 
+           Text="Quests"
+           Foreground="Purple" 
+           FontWeight="Bold" 
+           FontSize="48"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"/>
+                </Viewbox>
+            </Grid>
             <Canvas Visibility="Collapsed" Name="CanvasGoldenBTC" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" >
-                
             </Canvas>
+
         </Grid>
     </DockPanel>
 </Window>

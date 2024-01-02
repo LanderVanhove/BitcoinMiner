@@ -1,21 +1,15 @@
 ﻿using Microsoft.VisualBasic;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace BitcoinMiner
@@ -52,6 +46,9 @@ namespace BitcoinMiner
         double aantalClock = 0;
         double aantalCooler = 0;
         double aantalSecurity = 0;
+
+        double aantalGoldBTC = 0;
+
 
         //aantal bonus shopitems de klikker heeft
         double aantalBonusBasic = 1;
@@ -134,6 +131,7 @@ namespace BitcoinMiner
             CheckStoreAvailability();
             CheckBonusStoreAvailability();
             ShowStoreItemsBasedOnBTC();
+            QuestChecker();
 
             elapsedTimeInSeconds = stopwatch.ElapsedMilliseconds / 1000.0;
             stopwatch.Restart();
@@ -212,6 +210,7 @@ namespace BitcoinMiner
             ImgBTC.Height = 230;
             aantalBTC += 1;
             aantalBTCooit += 1;
+
         }
         private void ImgBTC_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -612,7 +611,7 @@ namespace BitcoinMiner
             TxtAantalSecurity.Content = (int)aantalSecurity;
             TxtPrijsSecurity.Content = $"{Math.Ceiling(prijsSecurity)} BTC";
 
-            passiefSecurity += (1400 * aantalBonusSecurity);
+            passiefSecurity += (7800 * aantalBonusSecurity);
 
             DoubleAnimation zoom = new DoubleAnimation
             {
@@ -1149,7 +1148,7 @@ namespace BitcoinMiner
             {
                 SpawnGoldenBTC();
             }
-            
+
         }
         private void SpawnGoldenBTC()
         {
@@ -1163,7 +1162,7 @@ namespace BitcoinMiner
             CanvasGoldenBTC.Children.Add(GoldBTC);
             GoldBTC.MouseDown += GoldBTC_MouseDown;
             AnimateImg(GoldBTC);
-            
+
         }
 
         private void GoldBTC_MouseDown(object sender, MouseButtonEventArgs e)
@@ -1172,6 +1171,7 @@ namespace BitcoinMiner
             Image clickedImage = sender as Image;
             aantalBTC += (passiefTotaal * 900);
             aantalBTCooit += (passiefTotaal * 900);
+            aantalGoldBTC++;
             CanvasGoldenBTC.Children.Remove(clickedImage);
             CanvasGoldenBTC.Visibility = Visibility.Collapsed;
 
@@ -1193,6 +1193,184 @@ namespace BitcoinMiner
             }
 
 
+        }
+
+        #region Quest variabelen
+        bool questBasic = false;
+        bool questAdvanced = false;
+        bool questMining = false;
+        bool questQuantum = false;
+        bool questClock = false;
+        bool questCooler = false;
+        bool questSecurity = false;
+
+        bool questBasicBonus = false;
+        bool questAdvancedBonus = false;
+        bool questMiningBonus = false;
+        bool questQuantumBonus = false;
+        bool questClockBonus = false;
+        bool questCoolerBonus = false;
+        bool questSecurityBonus = false;
+
+        bool questAantalBTC1000 = false;
+        bool questAantalBTC100000 = false;
+        bool questAantalBTC1000000 = false;
+        bool questAantalBTC1000000000 = false;
+
+        bool questAantalBTCperSeconde20 = false;
+        bool questAantalBTCperSeconde100 = false;
+        bool questAantalBTCperSeconde1000 = false;
+        bool questAantalBTCperSeconde50000 = false;
+
+        bool questGoldBTC1 = false;
+        bool questGoldBTC5 = false;
+        bool questGoldBTC10 = false;
+        #endregion
+        private void QuestChecker()
+        {
+
+            #region Quests eerste shopitem
+            if (aantalBasic == 1 && !questBasic)
+            {
+                MessageBox.Show("Je hebt je eerste Basic Miner gekocht! Nu zullen de machines voor jou werken.");
+                questBasic = true;
+                Quests.Visibility = Visibility.Visible;
+            }
+            if (aantalAdvanced == 1 && !questAdvanced)
+            {
+                MessageBox.Show("Je hebt je eerste Advanced Miner gekocht! Een verbeterde versie van de Basic Miner waardoor je nog sneller BTC kan minen!");
+                questAdvanced = true;
+            }
+            if (aantalMiningRig == 1 && !questMining)
+            {
+                MessageBox.Show("Je hebt je eerste Mining Rig gekocht! Nu worden de Basic & Advanced miners geconnecteerd op een grid zodat er nog efficiënter gemined kan worden.\r\n");
+                questMining = true;
+            }
+            if (aantalQuantum == 1 && !questQuantum)
+            {
+                MessageBox.Show("Je hebt je eerste Quantum Miner gekocht! De beste miner op de markt verkrijgbaar, nu in jouw bezit.");
+                questQuantum = true;
+            }
+            if (aantalClock == 1 && !questClock)
+            {
+                MessageBox.Show("Je hebt je eerste Overclocking Module gekocht! Alle miners kunnen nu meer power aan, wat betekent: MEER BITCOIN!");
+                questClock = true;
+            }
+            if (aantalCooler == 1 && !questCooler)
+            {
+                MessageBox.Show("Je hebt je eerste Cooling System gekocht! Dat werd tijd... Alle miners worden nu gekoeld met een state-of-the-art cooling system waardoor ze moeiteloos 24/7 kunnen minen.");
+                questCooler = true;
+            }
+            if (aantalSecurity == 1 && !questSecurity)
+            {
+                MessageBox.Show("Je hebt je eerste Security Protocol gekocht! Dankzij je toegevoegde security systeem hoeft het mining systeem geen CPU-power meer te verkwisten aan het tegenhouden van hackers, FULL POWER MINING!");
+                questSecurity = true;
+            }
+            #endregion
+            #region Quests eerste bonus shopitem
+            if (aantalBonusBasic == 2 && !questBasicBonus)
+            {
+                MessageBox.Show("Gefeliciteerd! Door deze aankoop worden alle Basic Miners nu dubbel zo waardevol.");
+                questBasicBonus = true;
+            }
+            if (aantalBonusAdvanced == 2 && !questAdvancedBonus)
+            {
+                MessageBox.Show("Innovatie begint hier! Je hebt zojuist de sleutel tot geavanceerde beloningen ontgrendeld. Alle Advanced Miners zijn nu twee keer zo winstgevend.");
+                questAdvancedBonus = true;
+            }
+            if (aantalBonusMiningRig == 2 && !questMiningBonus)
+            {
+                MessageBox.Show("Je eerste aankoop van een Mining Bonus opent de poort naar een stroom van extra voordelen. Al je Mining Rigs produceren nu dubbele opbrengsten.");
+                questMiningBonus = true;
+            }
+            if (aantalBonusQuantum == 2 && !questQuantumBonus)
+            {
+                MessageBox.Show("Met je eerste Quantum Bonus-aankoop ontketen je nieuwe dimensies van beloningen. Alle Quantum Miners zijn nu dubbel zo waardevol.");
+                questQuantumBonus = true;
+            }
+            if (aantalBonusClock == 2 && !questClockBonus)
+            {
+                MessageBox.Show("Tijd is geld! Door je eerste Clock Bonus aan te schaffen, heb je de sleutel tot temporele rijkdom in handen. Alle Overclocking Modules verdubbelen in opbrengst.");
+                questClockBonus = true;
+            }
+            if (aantalBonusCooler == 2 && !questCoolerBonus)
+            {
+                MessageBox.Show("Met je eerste Cooler Bonus geniet je van koelere winsten en extra's. Alle Cooling Systems brengen nu dubbel zoveel op.");
+                questCoolerBonus = true;
+            }
+            if (aantalBonusSecurity == 2 && !questSecurityBonus)
+            {
+                MessageBox.Show("Door je eerste Security Bonus te kopen, versterk je de verdedigingslinie van je crypto-rijk. Alle Security Protocols genereren nu dubbele opbrengsten.");
+                questSecurityBonus = true;
+            }
+            #endregion
+            #region Quests aantal BTC
+            if (aantalBTC >= 1000 && !questAantalBTC1000)
+            {
+                MessageBox.Show("1000 BTC behaald! Je Bitcoin-avontuur begint vruchten af te werpen: 1000 BTC!");
+                questAantalBTC1000 = true;
+            }
+            if (aantalBTC >= 100000 && !questAantalBTC100000)
+            {
+                MessageBox.Show("100000 BTC behaald! Jij bent de koning van de blockchain met 100,000 BTC op zak.");
+                questAantalBTC100000 = true;
+            }
+            if (aantalBTC >= 1000000 && !questAantalBTC1000000)
+            {
+                MessageBox.Show("1000000 BTC behaald! Een miljoen digitale schatten veroverd - jij bent een Bitcoin-legende.");
+                questAantalBTC1000000 = true;
+            }
+            if (aantalBTC >= 1000000000 && !questAantalBTC1000000000)
+            {
+                MessageBox.Show("1000000000 BTC behaald! Je hebt de grens doorbroken: een miljard BTC, een digitale titan.");
+                questAantalBTC1000000000 = true;
+            }
+            #endregion
+            #region Quests aantal BTC per seconde
+            if (passiefTotaal >= 20 && !questAantalBTCperSeconde20)
+            {
+                MessageBox.Show("20 BTC per seconde! Je Bitcoin-mijn draait als een goed geoliede machine: 20 BTC per seconde!");
+                questAantalBTCperSeconde20 = true;
+            }
+            if (passiefTotaal >= 100 && !questAantalBTCperSeconde100)
+            {
+                MessageBox.Show("100 BTC per seconde! In de snelheid van het digitale tijdperk, verzamel je moeiteloos 100 BTC per seconde, proficiat!");
+                questAantalBTCperSeconde100 = true;
+            }
+            if (passiefTotaal >= 1000 && !questAantalBTCperSeconde1000)
+            {
+                MessageBox.Show("1000 BTC per seconde! Je bent als een digitale tovenaar, creërend en verzamelend met een snelheid van 1000 BTC per seconde.");
+                questAantalBTCperSeconde1000 = true;
+            }
+            if (passiefTotaal >= 50000 && !questAantalBTCperSeconde50000)
+            {
+                MessageBox.Show("50000 BTC per seconde! Met een stormachtige snelheid van 50,000 BTC per seconde, ben je de koning van de Bitcoin-jungle.");
+                questAantalBTCperSeconde50000 = true;
+            }
+            #endregion
+            #region Quests Gouden BTC
+            if (aantalGoldBTC == 1 && !questGoldBTC1)
+            {
+                MessageBox.Show($"Mooi gespot! Deze Golden BTC-munt levert je maar liefst {passiefTotaal * 900} BTC op!");
+                questGoldBTC1 = true;
+            }
+            if (aantalGoldBTC == 5 && !questGoldBTC5)
+            {
+                MessageBox.Show($"Dit is al je 5de gouden BTC-munt! Deze munt levert je {passiefTotaal * 900} BTC op!");
+                questGoldBTC5 = true;
+            }
+            if (aantalGoldBTC == 10 && !questGoldBTC10)
+            {
+                MessageBox.Show($"Maar liefst al 10 gouden BTC-munten gevangen, wow! Deze munt levert je {passiefTotaal * 900} BTC op!");
+                questGoldBTC10 = true;
+            }
+            #endregion
+        }
+
+
+        private void DpMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            masterGrid.Focus();
         }
     }
 }
