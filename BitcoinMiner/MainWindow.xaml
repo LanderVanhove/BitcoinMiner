@@ -21,7 +21,7 @@
                     <MenuItem Name="BonusShop" Header="Bonus Shop" Visibility="Visible" Background="AntiqueWhite" Foreground="Purple" FontSize="20" Click="BonusShop_Click">
 
                     </MenuItem>
-                    <MenuItem Name="Quests" Header=" Quests" Visibility="Collapsed">
+                    <MenuItem Name="Quests" Header=" Quests" Visibility="Collapsed" Click="Quests_Click">
 
                     </MenuItem>
                 </WrapPanel>
@@ -865,10 +865,10 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
 
             </Grid>
 
-            <Grid Name="QuestGrid" Margin="20,20,20,20" Background="#001969" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid Name="QuestGrid" Visibility="Collapsed" Margin="20,20,20,20" Background="#001969" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.2*"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="0">
                     <TextBlock 
@@ -878,6 +878,11 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
            FontSize="48"
            HorizontalAlignment="Center"
            VerticalAlignment="Center"/>
+                </Viewbox>
+                <Viewbox Grid.Row="1" VerticalAlignment="Top">
+                    <ScrollViewer VerticalContentAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="201" Width="218">
+                        <Label x:Name="QuestHistoriek" Foreground="Purple" Background="#001969" FontSize="10" BorderThickness="0" Content="" />
+                    </ScrollViewer>
                 </Viewbox>
             </Grid>
             <Canvas Visibility="Collapsed" Name="CanvasGoldenBTC" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" >
