@@ -1,11 +1,14 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -25,9 +28,10 @@ namespace BitcoinMiner
         {
             InitializeComponent();
         }
+        #region Variabelen
 
-        double aantalBTC = 0;
-        double aantalBTCooit = 0;
+        double aantalBTC = 100000;
+        double aantalBTCooit = 100000;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -49,8 +53,7 @@ namespace BitcoinMiner
 
         double aantalGoldBTC = 0;
 
-
-        //aantal bonus shopitems de klikker heeft
+        //Welke multiplier actief is (bonus shop)
         double aantalBonusBasic = 1;
         double aantalBonusAdvanced = 1;
         double aantalBonusMiningRig = 1;
@@ -58,7 +61,6 @@ namespace BitcoinMiner
         double aantalBonusClock = 1;
         double aantalBonusCooler = 1;
         double aantalBonusSecurity = 1;
-
 
         //passief inkomen dat er bekomen in
         double passiefBasic = 0;
@@ -81,6 +83,20 @@ namespace BitcoinMiner
 
         double[] bonusPrijzen = new double[7] { 1500, 10000, 110000, 1200000, 13000000, 140000000, 2000000000 };
 
+        // timers en stopwatches
+        DispatcherTimer timer_ms = new DispatcherTimer();
+        DispatcherTimer timer_minuut = new DispatcherTimer();
+
+        private Stopwatch stopwatch = new Stopwatch();
+        private double elapsedTime = 0;
+
+
+        int tijdelijkBTC;
+
+
+        #endregion
+
+        //Berekent de prijs van de BonusStore items
         private void BonusStorePrijzen(double item, int x)
         {
             if (item == 1)
@@ -92,6 +108,8 @@ namespace BitcoinMiner
                 bonusPrijzen[x] *= 10;
             }
         }
+
+        //Update de prijzen van de Bonusstore items
         private void BonusPrijzenUpdaten()
         {
             prijsBonusBasic = bonusPrijzen[0];
@@ -103,13 +121,7 @@ namespace BitcoinMiner
             prijsBonusSecurity = bonusPrijzen[6];
         }
 
-        DispatcherTimer timer_ms = new DispatcherTimer();
-        DispatcherTimer timer_minuut = new DispatcherTimer();
-
-        private Stopwatch stopwatch = new Stopwatch();
-        private double elapsedTimeInSeconds = 0;
-
-
+        //het laden van de timers
         private void Timer_ms_Load()
         {
             timer_ms.Interval = TimeSpan.FromMilliseconds(10);
@@ -119,38 +131,56 @@ namespace BitcoinMiner
             timer_minuut.Interval = TimeSpan.FromMinutes(1);
             timer_minuut.Tick += Timer_minuut_Tick;
             timer_minuut.Start();
+
+            StartFallingTimer();
         }
 
+        //Aparte timer voor Golden Cookie
         private void Timer_minuut_Tick(object sender, EventArgs e)
         {
             RandomBTC();
         }
 
+        //Hoofdtimer 10 MS
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
-            CheckBonusStoreAvailability();
+            CheckMenuAvailability();
             ShowStoreItemsBasedOnBTC();
             QuestChecker();
 
-            elapsedTimeInSeconds = stopwatch.ElapsedMilliseconds / 1000.0;
+            elapsedTime = stopwatch.ElapsedMilliseconds / 1000.0;
             stopwatch.Restart();
 
             //update totale passief BTC
             passiefTotaal = passiefBasic + passiefAdvanced + passiefMiningRig + passiefQuantum + passiefClock + passiefCooler + passiefSecurity;
             LblBTCpersec.Content = passiefTotaal.ToString();
 
+            tijdelijkBTC = (int)aantalBTC;
+
             //update totale BTC adhv passief inkomen
-            aantalBTC += (passiefTotaal * elapsedTimeInSeconds);
-            aantalBTCooit += (passiefTotaal * elapsedTimeInSeconds);
+            aantalBTC += (passiefTotaal * elapsedTime);
+            aantalBTCooit += (passiefTotaal * elapsedTime);
 
-            //update totale BTC in shop en titel
+            //update totale BTC in shop en titel met juiste cijferweergave
             WeergaveCijfer();
-        }
 
+            if (tijdelijkBTC != (int)aantalBTC)
+            {
+                int verschil = (int)aantalBTC - tijdelijkBTC;
+                verschil = Math.Min(verschil, 50);
+                for (int i = 0; i < verschil; i++)
+                {
+                    FallingBTC();
+                }
+            }
+
+        }
+        
+        //Zorgt ervoor dat het cijfer van aantal cookies de juiste weergave heeft (miljoenen, triljoenen,...)
         private void WeergaveCijfer()
         {
-            double tempBTC = 0;
+            double tempBTC;
 
             if (aantalBTC >= 1000000000000000000)
             {
@@ -204,12 +234,14 @@ namespace BitcoinMiner
             }
         }
 
+        //Alle klikevents die te maken hebben met de BTC munt
         #region BTC_Munt_klikEvents
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ImgBTC.Height = 230;
             aantalBTC += 1;
             aantalBTCooit += 1;
+            FallingBTC();
 
         }
         private void ImgBTC_MouseUp(object sender, MouseButtonEventArgs e)
@@ -223,6 +255,7 @@ namespace BitcoinMiner
         }
         #endregion
 
+        //berekening om de shopitems te tonen op basis van ooit verzamelde BTC
         private void ShowStoreItemsBasedOnBTC()
         {
             if (aantalBTCooit < 15)
@@ -273,6 +306,8 @@ namespace BitcoinMiner
             }
 
         }
+
+        //controleert of Store Item enabled moet worden of niet
         private void CheckStoreAvailability()
         {
             if (aantalBTC >= prijsBasic)
@@ -452,13 +487,15 @@ namespace BitcoinMiner
 
         }
 
-        private void CheckBonusStoreAvailability()
+        //controleert of BonusStore zichtbaar moet worden in het menu
+        private void CheckMenuAvailability()
         {
-            if (aantalBTCooit >= 15)
+            if (aantalBasic >= 1 || aantalAdvanced >= 1 || aantalMiningRig >= 1 || aantalQuantum >= 1 || aantalClock >= 1 || aantalCooler >= 1 || aantalSecurity >= 1)
             {
                 DpMenu.Visibility = Visibility.Visible;
 
             }
+
 
         }
 
@@ -793,7 +830,7 @@ namespace BitcoinMiner
         }
         #endregion
 
-        #region Mouse events to change BG
+        #region Mouse events to change BG on items
         private void GridBasic_MouseEnter(object sender, MouseEventArgs e)
         {
             GridBasic.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
@@ -950,59 +987,7 @@ namespace BitcoinMiner
         }
         #endregion
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            ShowStoreItemsBasedOnBTC();
-            TooltipLoad();
-            Timer_ms_Load();
-            WrapItems.Visibility = Visibility.Collapsed;
-            Shop.Visibility = Visibility.Collapsed;
-        }
-        private void TooltipLoad()
-        {
-            ToolTip TTbasic = new ToolTip();
-            StringBuilder sbBasic = new StringBuilder();
-            sbBasic.AppendLine("Every basic miner will provide a passive income of 0.1 BTC every second");
-            TTbasic.Content = sbBasic.ToString();
-            GridBasic.ToolTip = TTbasic;
 
-            ToolTip TTadvanced = new ToolTip();
-            StringBuilder sbAdvanced = new StringBuilder();
-            sbAdvanced.AppendLine("Every Advanced miner will provide a passive income of 1 BTC every second");
-            TTadvanced.Content = sbAdvanced.ToString();
-            GridAdvanced.ToolTip = TTadvanced;
-
-            ToolTip TTminingRig = new ToolTip();
-            StringBuilder sbMiningRig = new StringBuilder();
-            sbMiningRig.AppendLine("Every Mining Rig will provide a passive income of 8 BTC every second");
-            TTminingRig.Content = sbMiningRig.ToString();
-            GridMiningRig.ToolTip = sbMiningRig;
-
-            ToolTip TTquantum = new ToolTip();
-            StringBuilder sbQuantum = new StringBuilder();
-            sbQuantum.AppendLine("Every Quantum miner will provide a passive income of 47 BTC every second");
-            TTquantum.Content = sbQuantum.ToString();
-            GridQuantum.ToolTip = sbQuantum;
-
-            ToolTip TTclock = new ToolTip();
-            StringBuilder sbClock = new StringBuilder();
-            sbClock.AppendLine("Every Overclocking Module will provide a passive income of 260 BTC every second");
-            TTclock.Content = sbClock.ToString();
-            GridClock.ToolTip = sbClock;
-
-            ToolTip TTcooler = new ToolTip();
-            StringBuilder sbCooler = new StringBuilder();
-            sbClock.AppendLine("Every Cooling System will provide a passive income of 1400 BTC every second");
-            TTcooler.Content = sbCooler.ToString();
-            GridCooling.ToolTip = sbCooler;
-
-            ToolTip TTsecurity = new ToolTip();
-            StringBuilder sbSecurity = new StringBuilder();
-            sbSecurity.AppendLine("Every Security Protocol will provide a passive income of 7800 BTC every second");
-            TTsecurity.Content = sbSecurity.ToString();
-            GridSecurity.ToolTip = sbSecurity;
-
-        }
 
         #region Naam Miner Veranderen
         private void LblNaam_MouseDown(object sender, MouseButtonEventArgs e)
@@ -1124,7 +1109,7 @@ namespace BitcoinMiner
 
         #endregion
 
-        #region Menu items
+        #region Menu items klikevents
         private void BonusShop_Click(object sender, RoutedEventArgs e)
         {
             Shop.Visibility = Visibility.Hidden;
@@ -1150,9 +1135,11 @@ namespace BitcoinMiner
         }
         #endregion
 
+
         Random rand1 = new Random();
         Random rand2 = new Random();
 
+        #region Golden BTC spawn & klik event
         private void RandomBTC()
         {
             int nummer = rand2.Next(1, 11);
@@ -1160,7 +1147,6 @@ namespace BitcoinMiner
             {
                 SpawnGoldenBTC();
             }
-
         }
         private void SpawnGoldenBTC()
         {
@@ -1174,9 +1160,7 @@ namespace BitcoinMiner
             CanvasGoldenBTC.Children.Add(GoldBTC);
             GoldBTC.MouseDown += GoldBTC_MouseDown;
             AnimateImg(GoldBTC);
-
         }
-
         private void GoldBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -1200,9 +1184,68 @@ namespace BitcoinMiner
                     CanvasGoldenBTC.Visibility = Visibility.Collapsed;
                 }
             }
-
-
         }
+        #endregion
+
+        #region Kleine BTC munt spawn bij klik/passief inkomen
+        private int vallendeBTC = 0;
+        DispatcherTimer fallingTimer = new DispatcherTimer();
+        private void StartFallingTimer()
+        {
+            fallingTimer.Interval = TimeSpan.FromMilliseconds(100);
+            fallingTimer.Tick += (sender, e) => FallingBTC();
+            fallingTimer.Start();
+        }
+
+        //spawnt een vallende BTC munt op random positie met een max van 50 stuks
+        private void FallingBTC()
+        {
+            if (vallendeBTC < 50 && passiefTotaal > 0)
+            {
+                Image smallBTC = new Image();
+                smallBTC.Source = ImgBTC.Source;
+                smallBTC.Height = ImgBTC.ActualHeight / 10;
+                smallBTC.Opacity = 0.5;
+                Canvas.SetTop(smallBTC, 0);
+                int randomLeft = rand1.Next(0, (int)FallingImages.ActualWidth);
+                Canvas.SetLeft(smallBTC, randomLeft);
+
+                vallendeBTC++;
+                FallingImages.Children.Add(smallBTC);
+                AnimateSmallImg(smallBTC);
+            }
+        }
+
+        //animeert die vallende BTC munt
+        private void AnimateSmallImg(Image img)
+        {
+            TranslateTransform translateTransform = new TranslateTransform();
+            img.RenderTransform = translateTransform;
+
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                To = FallingImages.ActualHeight + 50,
+                Duration = TimeSpan.FromSeconds(6)
+            };
+
+            animation.Completed += (s, args) =>
+            {
+                FallingImages.Children.Remove(img);
+                vallendeBTC--;
+
+            };
+
+            translateTransform.BeginAnimation(TranslateTransform.YProperty, animation);
+            
+            double adjustedInterval = Math.Max(Math.Sqrt(20/passiefTotaal),0.1);
+
+            if (fallingTimer != null)
+            {
+                fallingTimer.Interval = TimeSpan.FromSeconds(adjustedInterval);
+            }
+            
+        }
+        #endregion
 
         #region Quest variabelen
         bool questBasic = false;
@@ -1236,6 +1279,8 @@ namespace BitcoinMiner
         bool questGoldBTC10 = false;
         #endregion
         StringBuilder questBuilder = new StringBuilder();
+
+        //Checkt of er voldaan is aan een quest en toont deze daarna in het questoverzicht
         private void QuestChecker()
         {
 
@@ -1456,7 +1501,61 @@ namespace BitcoinMiner
         {
             masterGrid.Focus();
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ShowStoreItemsBasedOnBTC();
+            TooltipLoad();
+            Timer_ms_Load();
+            WrapItems.Visibility = Visibility.Collapsed;
+            Shop.Visibility = Visibility.Collapsed;
+        }
 
+        //Weergeeft tooltip op de shop items
+        private void TooltipLoad()
+        {
+            ToolTip TTbasic = new ToolTip();
+            StringBuilder sbBasic = new StringBuilder();
+            sbBasic.AppendLine("Every basic miner will provide a passive income of 0.1 BTC every second");
+            TTbasic.Content = sbBasic.ToString();
+            GridBasic.ToolTip = TTbasic;
+
+            ToolTip TTadvanced = new ToolTip();
+            StringBuilder sbAdvanced = new StringBuilder();
+            sbAdvanced.AppendLine("Every Advanced miner will provide a passive income of 1 BTC every second");
+            TTadvanced.Content = sbAdvanced.ToString();
+            GridAdvanced.ToolTip = TTadvanced;
+
+            ToolTip TTminingRig = new ToolTip();
+            StringBuilder sbMiningRig = new StringBuilder();
+            sbMiningRig.AppendLine("Every Mining Rig will provide a passive income of 8 BTC every second");
+            TTminingRig.Content = sbMiningRig.ToString();
+            GridMiningRig.ToolTip = sbMiningRig;
+
+            ToolTip TTquantum = new ToolTip();
+            StringBuilder sbQuantum = new StringBuilder();
+            sbQuantum.AppendLine("Every Quantum miner will provide a passive income of 47 BTC every second");
+            TTquantum.Content = sbQuantum.ToString();
+            GridQuantum.ToolTip = sbQuantum;
+
+            ToolTip TTclock = new ToolTip();
+            StringBuilder sbClock = new StringBuilder();
+            sbClock.AppendLine("Every Overclocking Module will provide a passive income of 260 BTC every second");
+            TTclock.Content = sbClock.ToString();
+            GridClock.ToolTip = sbClock;
+
+            ToolTip TTcooler = new ToolTip();
+            StringBuilder sbCooler = new StringBuilder();
+            sbClock.AppendLine("Every Cooling System will provide a passive income of 1400 BTC every second");
+            TTcooler.Content = sbCooler.ToString();
+            GridCooling.ToolTip = sbCooler;
+
+            ToolTip TTsecurity = new ToolTip();
+            StringBuilder sbSecurity = new StringBuilder();
+            sbSecurity.AppendLine("Every Security Protocol will provide a passive income of 7800 BTC every second");
+            TTsecurity.Content = sbSecurity.ToString();
+            GridSecurity.ToolTip = sbSecurity;
+
+        }
 
     }
 }

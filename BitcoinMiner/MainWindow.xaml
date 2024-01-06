@@ -28,6 +28,11 @@
             </Viewbox>
 
         </Menu>
+
+
+
+
+
         <Grid Name="masterGrid">
             <Grid.Background>
                 <ImageBrush ImageSource="Media/bg.png"/>
@@ -44,7 +49,15 @@
                 <RowDefinition Height="0.05*"/>
             </Grid.RowDefinitions>
 
-            <Viewbox x:Name="vbBTCImage" Grid.Row="1">
+
+
+            
+                <Canvas Grid.Row="1" Grid.Column="0" x:Name="FallingImages" Background="Transparent">
+                </Canvas>
+            
+            
+            
+            <Viewbox x:Name="vbBTCImage" Margin="-29,125,29,31" Grid.RowSpan="3">
                 <Image x:Name="ImgBTC" 
                Source="Media/bitcoin.png"
                Grid.Row="1"
@@ -77,6 +90,7 @@
                             </BeginStoryboard>
                         </EventTrigger>
                     </Image.Triggers>
+
                 </Image>
             </Viewbox>
 
@@ -887,6 +901,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
             </Grid>
             <Canvas Visibility="Collapsed" Name="CanvasGoldenBTC" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" >
             </Canvas>
+
 
         </Grid>
     </DockPanel>
