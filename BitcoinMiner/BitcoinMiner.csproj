@@ -122,5 +122,8 @@
     <Resource Include="Media\cooling-fan.png" />
     <Resource Include="Media\laptop.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\GoldBTC.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

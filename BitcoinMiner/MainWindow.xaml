@@ -12,6 +12,8 @@
         </Style>
     </Window.Resources>
     <DockPanel Background="Purple">
+        
+        <!-- Menuitems -->
         <Menu x:Name="DpMenu" Visibility="Collapsed" Height="50" DockPanel.Dock="Top" Background="LightBlue" BorderBrush="Beige" BorderThickness="5" FontFamily="bahnschrift" HorizontalAlignment="Center" MouseLeave="DpMenu_MouseLeave">
             <Viewbox HorizontalAlignment="Center">
                 <WrapPanel>
@@ -29,10 +31,7 @@
 
         </Menu>
 
-
-
-
-
+        <!-- Mastergrid, imagebrush background -->
         <Grid Name="masterGrid">
             <Grid.Background>
                 <ImageBrush ImageSource="Media/bg.png"/>
@@ -49,14 +48,11 @@
                 <RowDefinition Height="0.05*"/>
             </Grid.RowDefinitions>
 
-
-
-            
+            <!-- Het canvas waarop de vallende BTC munten gespawned worden -->
                 <Canvas Grid.Row="1" Grid.Column="0" x:Name="FallingImages" Background="Transparent">
                 </Canvas>
-            
-            
-            
+
+            <!-- Weergave van de munt + triggered mouse events -->
             <Viewbox x:Name="vbBTCImage" Margin="-29,125,29,31" Grid.RowSpan="3">
                 <Image x:Name="ImgBTC" 
                Source="Media/bitcoin.png"
@@ -94,6 +90,7 @@
                 </Image>
             </Viewbox>
 
+            <!-- Weergave naam + aantal BTC + passief BTC -->
             <Grid x:Name="gridMinerName"
             Background="#0f127b" 
             Grid.Row="0"
@@ -151,6 +148,7 @@
                 </Viewbox>
             </Grid>
 
+            <!-- Weergave van de shop en shopitems -->
             <Grid Name="Shop" 
             Grid.Column="2" 
             Grid.RowSpan="3" 
@@ -585,6 +583,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                 </Viewbox>
             </Grid>
 
+            <!-- Weergave van de BonusShop en shopitems -->
             <Grid x:Name="BonusShopList" 
                   Grid.Column="2" 
             Grid.RowSpan="3" 
@@ -811,6 +810,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                 </Border>
             </Grid>
 
+            <!-- Visuele weergave van de items -->
             <Grid Name="WrapItems"             
             Grid.Column="1" 
             Grid.RowSpan="3" 
@@ -878,7 +878,8 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                 </ScrollViewer>
 
             </Grid>
-
+            
+            <!-- Weergave van de Quests -->
             <Grid Name="QuestGrid" Visibility="Collapsed" Margin="20,20,20,20" Background="#001969" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.2*"/>
@@ -899,9 +900,10 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                     </ScrollViewer>
                 </Viewbox>
             </Grid>
+
+            <!-- Het canvas waarop de Gouden BTC munten gespawned wordt -->
             <Canvas Visibility="Collapsed" Name="CanvasGoldenBTC" Background="Transparent" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" >
             </Canvas>
-
 
         </Grid>
     </DockPanel>

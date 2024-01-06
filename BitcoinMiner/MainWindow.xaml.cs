@@ -30,8 +30,8 @@ namespace BitcoinMiner
         }
         #region Variabelen
 
-        double aantalBTC = 100000;
-        double aantalBTCooit = 100000;
+        double aantalBTC = 0;
+        double aantalBTCooit = 0;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -225,6 +225,8 @@ namespace BitcoinMiner
                     NumberGroupSeparator = " "
                 };
                 TxtAantalBTC.Content = aantalBTC.ToString("n0", formatInfo);
+                this.Title = $"You have {aantalBTC.ToString("n0", formatInfo)} BTC";
+
 
             }
             else
@@ -242,8 +244,8 @@ namespace BitcoinMiner
             aantalBTC += 1;
             aantalBTCooit += 1;
             FallingBTC();
-
         }
+
         private void ImgBTC_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ImgBTC.Height = 210;
@@ -693,7 +695,7 @@ namespace BitcoinMiner
             aantalBonusAdvanced *= 2;
             TxtAantalBonusAdvanced.Content = $"x{aantalBonusAdvanced}";
             AdvancedMultiplier.Text = $"x{aantalBonusAdvanced}";
-            TxtPrijsBonusAdvanced.Content = $"{Math.Ceiling(prijsBonusAdvanced)} BTC";
+            TxtPrijsBonusAdvanced.Content = $"Cost: {Math.Ceiling(prijsBonusAdvanced)}";
 
             passiefAdvanced *= 2;
 
@@ -717,7 +719,7 @@ namespace BitcoinMiner
             aantalBonusMiningRig *= 2;
             TxtAantalBonusMining.Content = $"x{aantalBonusMiningRig}";
             MiningMultiplier.Text = $"x{aantalBonusMiningRig}";
-            TxtPrijsBonusMining.Content = $"{Math.Ceiling(prijsBonusMiningRig)} BTC";
+            TxtPrijsBonusMining.Content = $"Cost: {Math.Ceiling(prijsBonusMiningRig)}";
 
             passiefMiningRig *= 2;
 
@@ -741,7 +743,7 @@ namespace BitcoinMiner
             aantalBonusQuantum *= 2;
             TxtAantalBonusQuantum.Content = $"x{aantalBonusQuantum}";
             QuantumMultiplier.Text = $"x{aantalBonusQuantum}";
-            TxtPrijsBonusQuantum.Content = $"{Math.Ceiling(prijsBonusQuantum)} BTC";
+            TxtPrijsBonusQuantum.Content = $"Cost: {Math.Ceiling(prijsBonusQuantum)}";
 
             passiefQuantum *= 2;
 
@@ -765,7 +767,7 @@ namespace BitcoinMiner
             aantalBonusClock *= 2;
             TxtAantalBonusClock.Content = $"x{aantalBonusClock}";
             ClockMultiplier.Text = $"x{aantalBonusClock}";
-            TxtPrijsBonusClock.Content = $"{Math.Ceiling(prijsBonusClock)} BTC";
+            TxtPrijsBonusClock.Content = $"Cost: {Math.Ceiling(prijsBonusClock)}";
 
             passiefClock *= 2;
 
@@ -789,7 +791,8 @@ namespace BitcoinMiner
             aantalBonusCooler *= 2;
             TxtAantalBonusCooling.Content = $"x{aantalBonusCooler}";
             CoolingMultiplier.Text = $"x{aantalBonusCooler}";
-            TxtPrijsBonusCooling.Content = $"{Math.Ceiling(prijsBonusCooler)} BTC";
+            TxtPrijsBonusCooling.Content = $"Cost: {Math.Ceiling(prijsBonusCooler)}";
+            
 
             passiefClock *= 2;
 
@@ -813,7 +816,7 @@ namespace BitcoinMiner
             aantalBonusSecurity *= 2;
             TxtAantalBonusSecurity.Content = $"x{aantalBonusSecurity}";
             SecurityMultiplier.Text = $"x{aantalBonusSecurity}";
-            TxtPrijsBonusSecurity.Content = $"{Math.Ceiling(prijsBonusSecurity)} BTC";
+            TxtPrijsBonusSecurity.Content = $"Cost: {Math.Ceiling(prijsBonusSecurity)}";
 
             passiefSecurity *= 2;
 
@@ -987,8 +990,6 @@ namespace BitcoinMiner
         }
         #endregion
 
-
-
         #region Naam Miner Veranderen
         private void LblNaam_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -1152,7 +1153,7 @@ namespace BitcoinMiner
         {
             CanvasGoldenBTC.Visibility = Visibility.Visible;
             Image GoldBTC = new Image();
-            GoldBTC.Source = ImgBTC.Source;
+            GoldBTC.Source = new BitmapImage(new Uri("Media/GoldBtc.png", UriKind.Relative));
             GoldBTC.Height = ImgBTC.Height;
             Canvas.SetTop(GoldBTC, -100);
             int randomLeft = rand1.Next(0, 500);
@@ -1188,7 +1189,7 @@ namespace BitcoinMiner
         #endregion
 
         #region Kleine BTC munt spawn bij klik/passief inkomen
-        private int vallendeBTC = 0;
+        int vallendeBTC = 0;
         DispatcherTimer fallingTimer = new DispatcherTimer();
         private void StartFallingTimer()
         {
@@ -1206,13 +1207,23 @@ namespace BitcoinMiner
                 smallBTC.Source = ImgBTC.Source;
                 smallBTC.Height = ImgBTC.ActualHeight / 10;
                 smallBTC.Opacity = 0.5;
-                Canvas.SetTop(smallBTC, 0);
-                int randomLeft = rand1.Next(0, (int)FallingImages.ActualWidth);
+                Canvas.SetTop(smallBTC, -50);
+                int randomLeft = rand1.Next(0, (int)FallingImages.ActualWidth-50);
                 Canvas.SetLeft(smallBTC, randomLeft);
 
                 vallendeBTC++;
                 FallingImages.Children.Add(smallBTC);
-                AnimateSmallImg(smallBTC);
+
+                double delay = vallendeBTC *0.1;
+
+                DispatcherTimer delayTimer = new DispatcherTimer();
+                delayTimer.Interval = TimeSpan.FromSeconds(delay);
+                delayTimer.Tick += (sender, e) =>
+                {
+                    AnimateSmallImg(smallBTC);
+                    delayTimer.Stop();
+                };
+                delayTimer.Start();
             }
         }
 
@@ -1225,7 +1236,7 @@ namespace BitcoinMiner
             DoubleAnimation animation = new DoubleAnimation
             {
                 To = FallingImages.ActualHeight + 50,
-                Duration = TimeSpan.FromSeconds(6)
+                Duration = TimeSpan.FromSeconds(4)
             };
 
             animation.Completed += (s, args) =>
@@ -1556,6 +1567,8 @@ namespace BitcoinMiner
             GridSecurity.ToolTip = sbSecurity;
 
         }
+
+
 
     }
 }
