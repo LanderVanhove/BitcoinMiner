@@ -155,7 +155,7 @@
             Margin="20,20,20,20" 
             MaxWidth="400"
             Background="#001969"
-                  Visibility="Collapsed">
+                  Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -817,7 +817,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
             Margin="20,20,20,20" 
             MaxWidth="400"
             Background="#001969"
-            Visibility="Collapsed">
+            Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>

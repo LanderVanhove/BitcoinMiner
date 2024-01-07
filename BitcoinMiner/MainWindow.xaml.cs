@@ -30,8 +30,8 @@ namespace BitcoinMiner
         }
         #region Variabelen
 
-        double aantalBTC = 0;
-        double aantalBTCooit = 0;
+        double aantalBTC = 1000000;
+        double aantalBTCooit = 1000000;
 
         //prijs van elk shopitem
         double prijsBasic = 15;
@@ -109,6 +109,7 @@ namespace BitcoinMiner
             }
         }
 
+
         //Update de prijzen van de Bonusstore items
         private void BonusPrijzenUpdaten()
         {
@@ -121,27 +122,8 @@ namespace BitcoinMiner
             prijsBonusSecurity = bonusPrijzen[6];
         }
 
-        //het laden van de timers
-        private void Timer_ms_Load()
-        {
-            timer_ms.Interval = TimeSpan.FromMilliseconds(10);
-            timer_ms.Tick += Timer_ms_Tick;
-            timer_ms.Start();
 
-            timer_minuut.Interval = TimeSpan.FromMinutes(1);
-            timer_minuut.Tick += Timer_minuut_Tick;
-            timer_minuut.Start();
-
-            StartFallingTimer();
-        }
-
-        //Aparte timer voor Golden Cookie
-        private void Timer_minuut_Tick(object sender, EventArgs e)
-        {
-            RandomBTC();
-        }
-
-        //Hoofdtimer 10 MS
+        //Hoofdtimer 10ms
         private void Timer_ms_Tick(object sender, EventArgs e)
         {
             CheckStoreAvailability();
@@ -177,6 +159,7 @@ namespace BitcoinMiner
 
         }
         
+
         //Zorgt ervoor dat het cijfer van aantal cookies de juiste weergave heeft (miljoenen, triljoenen,...)
         private void WeergaveCijfer()
         {
@@ -236,6 +219,7 @@ namespace BitcoinMiner
             }
         }
 
+
         //Alle klikevents die te maken hebben met de BTC munt
         #region BTC_Munt_klikEvents
         private void ImgBTC_MouseDown(object sender, MouseButtonEventArgs e)
@@ -243,6 +227,8 @@ namespace BitcoinMiner
             ImgBTC.Height = 230;
             aantalBTC += 1;
             aantalBTCooit += 1;
+
+            //spawnt een kleine BTC img bij elke klik
             FallingBTC();
         }
 
@@ -256,6 +242,7 @@ namespace BitcoinMiner
             ImgBTC.Height = 210;
         }
         #endregion
+
 
         //berekening om de shopitems te tonen op basis van ooit verzamelde BTC
         private void ShowStoreItemsBasedOnBTC()
@@ -309,185 +296,41 @@ namespace BitcoinMiner
 
         }
 
+
         //controleert of Store Item enabled moet worden of niet
         private void CheckStoreAvailability()
         {
-            if (aantalBTC >= prijsBasic)
-            {
-                GridBasic.Opacity = 1;
-                GridBasic.IsEnabled = true;
-                BorderBasic.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBasic.Opacity = 0.3;
-                GridBasic.IsEnabled = false;
-                BorderBasic.BorderThickness = new Thickness(0);
-            }
-
-            if (aantalBTC >= prijsAdvanced)
-            {
-                GridAdvanced.Opacity = 1;
-                GridAdvanced.IsEnabled = true;
-                BorderAdvanced.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridAdvanced.Opacity = 0.3;
-                GridAdvanced.IsEnabled = false;
-                BorderAdvanced.BorderThickness = new Thickness(0);
-            }
-
-            if (aantalBTC >= prijsMiningRig)
-            {
-                GridMiningRig.Opacity = 1;
-                GridMiningRig.IsEnabled = true;
-                BorderMiningRig.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridMiningRig.Opacity = 0.3;
-                GridMiningRig.IsEnabled = false;
-                BorderMiningRig.BorderThickness = new Thickness(0);
-            }
-
-            if (aantalBTC >= prijsQuantum)
-            {
-                GridQuantum.Opacity = 1;
-                GridQuantum.IsEnabled = true;
-                BorderQuantum.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridQuantum.Opacity = 0.3;
-                GridQuantum.IsEnabled = false;
-                BorderQuantum.BorderThickness = new Thickness(0);
-            }
-
-            if (aantalBTC >= prijsClock)
-            {
-                GridClock.Opacity = 1;
-                GridClock.IsEnabled = true;
-                BorderClock.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridClock.Opacity = 0.3;
-                GridClock.IsEnabled = false;
-                BorderClock.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsCooler)
-            {
-                GridCooling.Opacity = 1;
-                GridCooling.IsEnabled = true;
-                BorderCooling.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridCooling.Opacity = 0.3;
-                GridCooling.IsEnabled = false;
-                BorderCooling.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsSecurity)
-            {
-                GridSecurity.Opacity = 1;
-                GridSecurity.IsEnabled = true;
-                BorderSecurity.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridSecurity.Opacity = 0.3;
-                GridSecurity.IsEnabled = false;
-                BorderSecurity.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsBonusBasic)
-            {
-                GridBonusBasic.Opacity = 1;
-                GridBonusBasic.IsEnabled = true;
-                BorderBonusBasic.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBonusBasic.Opacity = 0.3;
-                GridBonusBasic.IsEnabled = false;
-                BorderBonusBasic.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsBonusAdvanced)
-            {
-                GridBonusAdvanced.Opacity = 1;
-                GridBonusAdvanced.IsEnabled = true;
-                BorderBonusAdvanced.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBonusAdvanced.Opacity = 0.3;
-                GridBonusAdvanced.IsEnabled = false;
-                BorderBonusAdvanced.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsBonusMiningRig)
-            {
-                GridBonusMining.Opacity = 1;
-                GridBonusMining.IsEnabled = true;
-                BorderBonusMining.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBonusMining.Opacity = 0.3;
-                GridBonusMining.IsEnabled = false;
-                BorderBonusMining.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsBonusQuantum)
-            {
-                GridBonusQuantum.Opacity = 1;
-                GridBonusQuantum.IsEnabled = true;
-                BorderBonusQuantum.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBonusQuantum.Opacity = 0.3;
-                GridBonusQuantum.IsEnabled = false;
-                BorderBonusQuantum.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsBonusClock)
-            {
-                GridBonusClock.Opacity = 1;
-                GridBonusClock.IsEnabled = true;
-                BorderBonusClock.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBonusClock.Opacity = 0.3;
-                GridBonusClock.IsEnabled = false;
-                BorderBonusClock.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsBonusCooler)
-            {
-                GridBonusCooling.Opacity = 1;
-                GridBonusCooling.IsEnabled = true;
-                BorderBonusCooling.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBonusCooling.Opacity = 0.3;
-                GridBonusCooling.IsEnabled = false;
-                BorderBonusCooling.BorderThickness = new Thickness(0);
-            }
-            if (aantalBTC >= prijsBonusSecurity)
-            {
-                GridBonusSecurity.Opacity = 1;
-                GridBonusSecurity.IsEnabled = true;
-                BorderBonusSecurity.BorderThickness = new Thickness(2);
-            }
-            else
-            {
-                GridBonusSecurity.Opacity = 0.3;
-                GridBonusSecurity.IsEnabled = false;
-                BorderBonusSecurity.BorderThickness = new Thickness(0);
-            }
-
-
-
+            UpdateGrid(GridBasic, BorderBasic, prijsBasic);
+            UpdateGrid(GridAdvanced, BorderAdvanced, prijsAdvanced);
+            UpdateGrid(GridMiningRig, BorderMiningRig, prijsMiningRig);
+            UpdateGrid(GridQuantum, BorderQuantum, prijsQuantum);
+            UpdateGrid(GridClock, BorderClock, prijsClock);
+            UpdateGrid(GridCooling, BorderCooling, prijsCooler);
+            UpdateGrid(GridSecurity, BorderSecurity, prijsSecurity);
+            UpdateGrid(GridBonusBasic, BorderBonusBasic, prijsBonusBasic);
+            UpdateGrid(GridBonusAdvanced, BorderBonusAdvanced, prijsBonusAdvanced);
+            UpdateGrid(GridBonusMining, BorderBonusMining, prijsBonusMiningRig);
+            UpdateGrid(GridBonusQuantum, BorderBonusQuantum, prijsBonusQuantum);
+            UpdateGrid(GridBonusClock, BorderBonusClock, prijsBonusClock);
+            UpdateGrid(GridBonusCooling, BorderBonusCooling, prijsBonusCooler);
+            UpdateGrid(GridBonusSecurity, BorderBonusSecurity, prijsBonusSecurity);
         }
+        private void UpdateGrid(Grid grid, Border border, double price)
+        {
+            if (aantalBTC >= price)
+            {
+                grid.Opacity = 1;
+                grid.IsEnabled = true;
+                border.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                grid.Opacity = 0.3;
+                grid.IsEnabled = false;
+                border.BorderThickness = new Thickness(0);
+            }
+        }
+
 
         //controleert of BonusStore zichtbaar moet worden in het menu
         private void CheckMenuAvailability()
@@ -838,31 +681,26 @@ namespace BitcoinMiner
         {
             GridBasic.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
         }
-
         private void GridBasic_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBasic.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
 
         }
-
         private void GridAdvanced_MouseEnter(object sender, MouseEventArgs e)
         {
             GridAdvanced.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridAdvanced_MouseLeave(object sender, MouseEventArgs e)
         {
             GridAdvanced.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
 
         }
-
         private void GridMiningRig_MouseEnter(object sender, MouseEventArgs e)
         {
             GridMiningRig.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridMiningRig_MouseLeave(object sender, MouseEventArgs e)
         {
             GridMiningRig.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -872,7 +710,6 @@ namespace BitcoinMiner
         {
             GridQuantum.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
         }
-
         private void GridQuantum_MouseLeave(object sender, MouseEventArgs e)
         {
             GridQuantum.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -882,42 +719,35 @@ namespace BitcoinMiner
             GridClock.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridClock_MouseLeave(object sender, MouseEventArgs e)
         {
             GridClock.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
 
         }
-
         private void GridCooling_MouseEnter(object sender, MouseEventArgs e)
         {
             GridCooling.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridCooling_MouseLeave(object sender, MouseEventArgs e)
         {
             GridCooling.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
 
         }
-
         private void GridSecurity_MouseEnter(object sender, MouseEventArgs e)
         {
             GridSecurity.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridSecurity_MouseLeave(object sender, MouseEventArgs e)
         {
             GridSecurity.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
 
         }
-
         private void GridBonusBasic_MouseEnter(object sender, MouseEventArgs e)
         {
             GridBonusBasic.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
         }
-
         private void GridBonusBasic_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBonusBasic.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -927,7 +757,6 @@ namespace BitcoinMiner
             GridBonusAdvanced.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridBonusAdvanced_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBonusAdvanced.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -938,7 +767,6 @@ namespace BitcoinMiner
             GridBonusMining.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridBonusMining_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBonusMining.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -949,7 +777,6 @@ namespace BitcoinMiner
             GridBonusQuantum.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridBonusQuantum_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBonusQuantum.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -960,7 +787,6 @@ namespace BitcoinMiner
             GridBonusClock.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridBonusClock_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBonusClock.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -971,7 +797,6 @@ namespace BitcoinMiner
             GridBonusCooling.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridBonusCooling_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBonusCooling.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -982,7 +807,6 @@ namespace BitcoinMiner
             GridBonusSecurity.Background = new SolidColorBrush(Color.FromArgb(219, 74, 88, 255));
 
         }
-
         private void GridBonusSecurity_MouseLeave(object sender, MouseEventArgs e)
         {
             GridBonusSecurity.Background = new SolidColorBrush(Color.FromArgb(0, 25, 105, 255));
@@ -996,6 +820,7 @@ namespace BitcoinMiner
             VraagNaam();
 
         }
+        //De naam kan niet leeg of enkel spaties bevatten, naam moet ook tussen 3 en 12 karakters langs zijn
         private void VraagNaam()
         {
             string invoer = Interaction.InputBox("What's the name of your Bitcoin Mining Emperium?");
@@ -1030,11 +855,13 @@ namespace BitcoinMiner
         #region Gekochte items toevoegen aan UI
         private void ToevoegenBasic()
         {
+            //aanmaken van image
             Image basic = new Image();
             basic.Source = new BitmapImage(new Uri(@"Media/basicMiner.png", UriKind.RelativeOrAbsolute));
             basic.Height = 70;
             basic.Margin = new Thickness(2);
 
+            //image toevoegen aan het juiste wrappanel
             wrapBasic.Children.Add(basic);
             wrapBasic.Visibility = Visibility.Visible;
             WrapItems.Visibility = Visibility.Visible;
@@ -1141,6 +968,12 @@ namespace BitcoinMiner
         Random rand2 = new Random();
 
         #region Golden BTC spawn & klik event
+
+        //Aparte timer voor Golden Cookie
+        private void Timer_minuut_Tick(object sender, EventArgs e)
+        {
+            RandomBTC();
+        }
         private void RandomBTC()
         {
             int nummer = rand2.Next(1, 11);
@@ -1151,16 +984,25 @@ namespace BitcoinMiner
         }
         private void SpawnGoldenBTC()
         {
+
             CanvasGoldenBTC.Visibility = Visibility.Visible;
+
+            //aanmaken image
             Image GoldBTC = new Image();
             GoldBTC.Source = new BitmapImage(new Uri("Media/GoldBtc.png", UriKind.Relative));
             GoldBTC.Height = ImgBTC.Height;
+
+            //positioneer image op canvas
             Canvas.SetTop(GoldBTC, -100);
             int randomLeft = rand1.Next(0, 500);
             Canvas.SetLeft(GoldBTC, randomLeft);
             CanvasGoldenBTC.Children.Add(GoldBTC);
+
+            //klikevent
             GoldBTC.MouseDown += GoldBTC_MouseDown;
-            AnimateImg(GoldBTC);
+
+            //animation
+            AnimateGoldenBTC(GoldBTC);
         }
         private void GoldBTC_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -1172,7 +1014,7 @@ namespace BitcoinMiner
             CanvasGoldenBTC.Children.Remove(clickedImage);
             CanvasGoldenBTC.Visibility = Visibility.Collapsed;
         }
-        private async void AnimateImg(Image img)
+        private async void AnimateGoldenBTC(Image img)
         {
             while (Canvas.GetTop(img) < 1000)
             {
@@ -1189,6 +1031,7 @@ namespace BitcoinMiner
         #endregion
 
         #region Kleine BTC munt spawn bij klik/passief inkomen
+
         int vallendeBTC = 0;
         DispatcherTimer fallingTimer = new DispatcherTimer();
         private void StartFallingTimer()
@@ -1203,10 +1046,13 @@ namespace BitcoinMiner
         {
             if (vallendeBTC < 50 && passiefTotaal > 0)
             {
+                //aanmaken van image
                 Image smallBTC = new Image();
                 smallBTC.Source = ImgBTC.Source;
                 smallBTC.Height = ImgBTC.ActualHeight / 10;
                 smallBTC.Opacity = 0.5;
+
+                //positioneer image
                 Canvas.SetTop(smallBTC, -50);
                 int randomLeft = rand1.Next(0, (int)FallingImages.ActualWidth-50);
                 Canvas.SetLeft(smallBTC, randomLeft);
@@ -1214,8 +1060,8 @@ namespace BitcoinMiner
                 vallendeBTC++;
                 FallingImages.Children.Add(smallBTC);
 
+                //creeert een delay op de animation van de verschillende vallende IMG's
                 double delay = vallendeBTC *0.1;
-
                 DispatcherTimer delayTimer = new DispatcherTimer();
                 delayTimer.Interval = TimeSpan.FromSeconds(delay);
                 delayTimer.Tick += (sender, e) =>
@@ -1508,15 +1354,19 @@ namespace BitcoinMiner
         }
 
 
+
         private void DpMenu_MouseLeave(object sender, MouseEventArgs e)
         {
             masterGrid.Focus();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
             ShowStoreItemsBasedOnBTC();
             TooltipLoad();
             Timer_ms_Load();
+            Timer_minuut_Load();
+            StartFallingTimer();
             WrapItems.Visibility = Visibility.Collapsed;
             Shop.Visibility = Visibility.Collapsed;
         }
@@ -1568,7 +1418,18 @@ namespace BitcoinMiner
 
         }
 
-
-
+        //Timer loaders
+        private void Timer_ms_Load()
+        {
+            timer_ms.Interval = TimeSpan.FromMilliseconds(10);
+            timer_ms.Tick += Timer_ms_Tick;
+            timer_ms.Start();
+        }
+        private void Timer_minuut_Load()
+        {
+            timer_minuut.Interval = TimeSpan.FromMinutes(1);
+            timer_minuut.Tick += Timer_minuut_Tick;
+            timer_minuut.Start();
+        }
     }
 }
