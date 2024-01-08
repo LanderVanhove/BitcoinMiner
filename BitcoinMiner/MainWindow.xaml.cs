@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace BitcoinMiner
 
         double aantalBTC = 1000000;
         double aantalBTCooit = 1000000;
+        int aantalBTCgeklikt = 0;
 
 
         //prijs van elk shopitem
@@ -143,6 +145,7 @@ namespace BitcoinMiner
             ShowStoreItemsBasedOnBTC();
             QuestChecker();
             TooltipLoad();
+            StatsLoad();
 
             elapsedTime = stopwatch.ElapsedMilliseconds / 1000.0;
             stopwatch.Restart();
@@ -249,6 +252,7 @@ namespace BitcoinMiner
             ImgBTC.Height = 230;
             aantalBTC += 1;
             aantalBTCooit += 1;
+            aantalBTCgeklikt += 1;
 
             //spawnt een kleine BTC img bij elke klik
             FallingBTC();
@@ -1138,6 +1142,7 @@ namespace BitcoinMiner
         }
         #endregion
 
+        
         #region Quest variabelen
         bool questBasic = false;
         bool questAdvanced = false;
@@ -1168,6 +1173,8 @@ namespace BitcoinMiner
         bool questGoldBTC1 = false;
         bool questGoldBTC5 = false;
         bool questGoldBTC10 = false;
+
+        int aantalQuestsVoltooid = 0;
         #endregion
         StringBuilder questBuilder = new StringBuilder();
 
@@ -1183,6 +1190,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt je eerste 'Basic Miner' gekocht!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
 
             }
             if (aantalAdvanced == 1 && !questAdvanced)
@@ -1192,6 +1200,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt je eerste 'Advanced Miner' gekocht!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalMiningRig == 1 && !questMining)
             {
@@ -1199,6 +1208,7 @@ namespace BitcoinMiner
                 questMining = true;
                 questBuilder.AppendLine("Je hebt je eerste 'Mining Rig' gekocht!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalQuantum == 1 && !questQuantum)
             {
@@ -1207,6 +1217,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt je eerste 'Quantum Miner' gekocht!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalClock == 1 && !questClock)
             {
@@ -1215,6 +1226,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt je eerste 'Overclocking Module' gekocht!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalCooler == 1 && !questCooler)
             {
@@ -1223,6 +1235,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt je eerste 'Cooling System' gekocht!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalSecurity == 1 && !questSecurity)
             {
@@ -1231,6 +1244,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt je eerste 'Security Protocol' gekocht!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             #endregion
             #region Quests eerste bonus shopitem
@@ -1241,6 +1255,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een verdubbelaar gekocht voor de 'Basic Miners'");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBonusAdvanced == 2 && !questAdvancedBonus)
             {
@@ -1249,6 +1264,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een verdubbelaar gekocht voor de 'Advanced Miners'");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBonusMiningRig == 2 && !questMiningBonus)
             {
@@ -1257,6 +1273,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een verdubbelaar gekocht voor de 'Mining Rigs'");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBonusQuantum == 2 && !questQuantumBonus)
             {
@@ -1265,6 +1282,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een verdubbelaar gekocht voor de 'Quantum Miners'");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBonusClock == 2 && !questClockBonus)
             {
@@ -1273,6 +1291,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een verdubbelaar gekocht voor de 'Overclocking Modules'");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBonusCooler == 2 && !questCoolerBonus)
             {
@@ -1281,6 +1300,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een verdubbelaar gekocht voor de 'Cooling Systems'");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBonusSecurity == 2 && !questSecurityBonus)
             {
@@ -1289,6 +1309,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een verdubbelaar gekocht voor de 'Security Protocols'");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             #endregion
             #region Quests aantal BTC
@@ -1299,6 +1320,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt de kaap van 1.000 BTC bereikt!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBTC >= 100000 && !questAantalBTC100000)
             {
@@ -1307,6 +1329,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt de kaap van 100.000 BTC bereikt!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBTC >= 1000000 && !questAantalBTC1000000)
             {
@@ -1315,6 +1338,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt de kaap van 1 miljoen BTC bereikt!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalBTC >= 1000000000 && !questAantalBTC1000000000)
             {
@@ -1323,6 +1347,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt de kaap van 1 miljard BTC bereikt!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             #endregion
             #region Quests aantal BTC per seconde
@@ -1333,6 +1358,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een inkomen van 20 BTC/s behaald!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (passiefTotaal >= 100 && !questAantalBTCperSeconde100)
             {
@@ -1341,6 +1367,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een inkomen van 100 BTC/s behaald!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (passiefTotaal >= 1000 && !questAantalBTCperSeconde1000)
             {
@@ -1349,6 +1376,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een inkomen van 1.000 BTC/s behaald!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (passiefTotaal >= 50000 && !questAantalBTCperSeconde50000)
             {
@@ -1357,6 +1385,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt een inkomen van 50.000 BTC/s behaald!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             #endregion
             #region Quests Gouden BTC
@@ -1367,6 +1396,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je eerste gouden munt is gevangen!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalGoldBTC == 5 && !questGoldBTC5)
             {
@@ -1375,6 +1405,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt in totaal al 5 gouden munten gevangen!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             if (aantalGoldBTC == 10 && !questGoldBTC10)
             {
@@ -1383,6 +1414,7 @@ namespace BitcoinMiner
                 Quests.Visibility = Visibility.Visible;
                 questBuilder.AppendLine("Je hebt in totaal al 10 gouden munten gevangen!");
                 QuestHistoriek.Content = questBuilder.ToString();
+                aantalQuestsVoltooid++;
             }
             #endregion
         }
@@ -1401,6 +1433,7 @@ namespace BitcoinMiner
             Timer_ms_Load();
             Timer_minuut_Load();
             StartFallingTimer();
+            GameTimer();
             WrapItems.Visibility = Visibility.Collapsed;
             Shop.Visibility = Visibility.Collapsed;
         }
@@ -1488,6 +1521,46 @@ namespace BitcoinMiner
             timer_minuut.Start();
         }
 
+        //Weergeeft de actuele stats
+        private void StatsLoad()
+        {
+            StringBuilder sbStatistieken = new StringBuilder();
+            sbStatistieken.AppendLine($"Je hebt momenteel {aantalBTC} BTC");
+            sbStatistieken.AppendLine($"Je hebt tot nu toe {aantalBTCooit} BTC verzameld");
+            sbStatistieken.AppendLine($"Speeltijd: {uren} uren, {minuten} minuten, {seconden} seconden");
+            sbStatistieken.AppendLine($"Je hebt zelf {aantalBTCgeklikt} BTC gemined");
+            sbStatistieken.AppendLine($"Je hebt {aantalGoldBTC} gouden BTC munten verzameld");
+            sbStatistieken.AppendLine($"Je hebt tot nu toe {aantalQuestsVoltooid}/25 quests voltooid");
+            LblStats.Content = sbStatistieken.ToString();
+        }
 
+        //Start totale gametime timer
+
+
+        private void GameTimer()
+        {
+            DispatcherTimer gameTimer = new DispatcherTimer();
+            gameTimer.Interval = new TimeSpan(0, 0, 1);
+            gameTimer.Tick += GameTimer_Tick;
+            gameTimer.Start();
+        }
+        int seconden = 0;
+        int minuten = 0;
+        int uren = 0;
+        private void GameTimer_Tick(object sender, EventArgs e)
+        {
+            seconden++;
+
+            if (seconden == 60)
+            {
+                seconden = 0;
+                minuten++;
+            }
+            if (minuten == 60)
+            {
+                minuten = 0;
+                uren++;
+            }
+        }
     }
 }

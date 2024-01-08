@@ -919,7 +919,11 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"/>
                 </Viewbox>
-
+                <Viewbox Grid.Row="1" VerticalAlignment="Top">
+                    <ScrollViewer VerticalContentAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="201" Width="218">
+                        <Label x:Name="LblStats" Foreground="Purple" Background="#001969" FontSize="10" BorderThickness="0" Content="" />
+                    </ScrollViewer>
+                </Viewbox>
             </Grid>
 
             <!-- Het canvas waarop de Gouden BTC munten gespawned wordt -->
