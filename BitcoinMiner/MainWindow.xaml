@@ -14,7 +14,7 @@
     <DockPanel Background="Purple">
         
         <!-- Menuitems -->
-        <Menu x:Name="DpMenu" Visibility="Collapsed" Height="50" DockPanel.Dock="Top" Background="LightBlue" BorderBrush="Beige" BorderThickness="5" FontFamily="bahnschrift" HorizontalAlignment="Center" MouseLeave="DpMenu_MouseLeave">
+        <Menu x:Name="DpMenu" Visibility="Visible" Height="50" DockPanel.Dock="Top" Background="LightBlue" BorderBrush="Beige" BorderThickness="5" FontFamily="bahnschrift" HorizontalAlignment="Center" MouseLeave="DpMenu_MouseLeave">
             <Viewbox HorizontalAlignment="Center">
                 <WrapPanel>
                     <MenuItem Name="ShopList" Header="Shop" Visibility="Visible" Click="ShopList_Click">
@@ -25,6 +25,9 @@
                     </MenuItem>
                     <MenuItem Name="Quests" Header=" Quests" Visibility="Collapsed" Click="Quests_Click">
 
+                    </MenuItem>
+
+                    <MenuItem Name="Statistieken" Header=" Statistieken" Visibility="Visible" Click="Stats_Click">
                     </MenuItem>
                 </WrapPanel>
             </Viewbox>
@@ -155,7 +158,7 @@
             Margin="20,20,20,20" 
             MaxWidth="400"
             Background="#001969"
-                  Visibility="Visible">
+                  Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -590,7 +593,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
             Margin="20,20,20,20" 
             MaxWidth="400"
             Background="#001969"
-                  Visibility="Hidden">
+                  Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -817,7 +820,7 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
             Margin="20,20,20,20" 
             MaxWidth="400"
             Background="#001969"
-            Visibility="Visible">
+            Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -899,6 +902,24 @@ Opacity="0.3" MouseDown="GridSecurity_MouseDown" MouseEnter="GridSecurity_MouseE
                         <Label x:Name="QuestHistoriek" Foreground="Purple" Background="#001969" FontSize="10" BorderThickness="0" Content="" />
                     </ScrollViewer>
                 </Viewbox>
+            </Grid>
+
+            <!-- Weergave van de Statistieken -->
+            <Grid Name="StatsGrid" Visibility="Visible" Margin="20,20,20,20" Background="#001969" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <TextBlock 
+                        Text="Stats"
+                        Foreground="Purple" 
+                        FontWeight="Bold" 
+                        FontSize="48"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                </Viewbox>
+
             </Grid>
 
             <!-- Het canvas waarop de Gouden BTC munten gespawned wordt -->
