@@ -152,7 +152,7 @@ namespace BitcoinMiner
 
             //update totale passief BTC
             passiefTotaal = passiefBasic + passiefAdvanced + passiefMiningRig + passiefQuantum + passiefClock + passiefCooler + passiefSecurity;
-            LblBTCpersec.Content = passiefTotaal.ToString();
+            LblBTCpersec.Content = $"{passiefTotaal:# ##0.00}";
 
             tijdelijkBTC = (int)aantalBTC;
 
@@ -378,7 +378,7 @@ namespace BitcoinMiner
             prijsBasic *= 1.15;
             aantalBasic++;
             TxtAantalBasic.Content = (int)aantalBasic;
-            TxtprijsBasic.Content = $"{Math.Ceiling(prijsBasic)} BTC";
+            TxtprijsBasic.Content = $"{Math.Ceiling(prijsBasic):# ##0} BTC";
 
             passiefBasic += (0.1 * aantalBonusBasic);
 
@@ -401,7 +401,7 @@ namespace BitcoinMiner
             prijsAdvanced *= 1.15;
             aantalAdvanced++;
             TxtAantalAdvanced.Content = (int)aantalAdvanced;
-            TxtprijsAdvanced.Content = $"{Math.Ceiling(prijsAdvanced)} BTC";
+            TxtprijsAdvanced.Content = $"{Math.Ceiling(prijsAdvanced):# ##0} BTC";
 
             passiefAdvanced += (1 * aantalBonusAdvanced);
 
@@ -425,7 +425,7 @@ namespace BitcoinMiner
             prijsMiningRig *= 1.15;
             aantalMiningRig++;
             TxtAantalMiningRig.Content = (int)aantalMiningRig;
-            TxtprijsMiningRig.Content = $"{Math.Ceiling(prijsMiningRig)} BTC";
+            TxtprijsMiningRig.Content = $"{Math.Ceiling(prijsMiningRig):# ##0} BTC";
 
             passiefMiningRig += (8 * aantalBonusMiningRig);
 
@@ -448,7 +448,7 @@ namespace BitcoinMiner
             prijsQuantum *= 1.15;
             aantalQuantum++;
             TxtAantalQuantum.Content = (int)aantalQuantum;
-            TxtprijsQuantum.Content = $"{Math.Ceiling(prijsQuantum)} BTC";
+            TxtprijsQuantum.Content = $"{Math.Ceiling(prijsQuantum):# ##0} BTC";
 
             passiefQuantum += (47 * aantalBonusQuantum);
 
@@ -471,7 +471,7 @@ namespace BitcoinMiner
             prijsClock *= 1.15;
             aantalClock++;
             TxtAantalClock.Content = (int)aantalClock;
-            TxtPrijsClock.Content = $"{Math.Ceiling(prijsClock)} BTC";
+            TxtPrijsClock.Content = $"{Math.Ceiling(prijsClock):# ##0} BTC";
 
             passiefClock += (260 * aantalBonusClock);
 
@@ -494,7 +494,7 @@ namespace BitcoinMiner
             prijsCooler *= 1.15;
             aantalCooler++;
             TxtAantalCooling.Content = (int)aantalCooler;
-            TxtPrijsCooling.Content = $"{Math.Ceiling(prijsCooler)} BTC";
+            TxtPrijsCooling.Content = $"{Math.Ceiling(prijsCooler):# ##0} BTC";
 
             passiefClock += (1400 * aantalBonusCooler);
 
@@ -517,7 +517,7 @@ namespace BitcoinMiner
             prijsSecurity *= 1.15;
             aantalSecurity++;
             TxtAantalSecurity.Content = (int)aantalSecurity;
-            TxtPrijsSecurity.Content = $"{Math.Ceiling(prijsSecurity)} BTC";
+            TxtPrijsSecurity.Content = $"{Math.Ceiling(prijsSecurity):# ##0} BTC";
 
             passiefSecurity += (7800 * aantalBonusSecurity);
 
@@ -540,7 +540,7 @@ namespace BitcoinMiner
             aantalBonusBasic *= 2;
             TxtAantalBonusBasic.Content = $"x{aantalBonusBasic}";
             BasicMultiplier.Text = $"x{aantalBonusBasic}";
-            TxtPrijsBonusBasic.Content = $"Cost: {Math.Ceiling(prijsBonusBasic)}";
+            TxtPrijsBonusBasic.Content = $"Cost: {Math.Ceiling(prijsBonusBasic):# ##0}";
 
             passiefBasic *= 2;
 
@@ -564,7 +564,7 @@ namespace BitcoinMiner
             aantalBonusAdvanced *= 2;
             TxtAantalBonusAdvanced.Content = $"x{aantalBonusAdvanced}";
             AdvancedMultiplier.Text = $"x{aantalBonusAdvanced}";
-            TxtPrijsBonusAdvanced.Content = $"Cost: {Math.Ceiling(prijsBonusAdvanced)}";
+            TxtPrijsBonusAdvanced.Content = $"Cost: {Math.Ceiling(prijsBonusAdvanced):# ##0}";
 
             passiefAdvanced *= 2;
 
@@ -588,7 +588,7 @@ namespace BitcoinMiner
             aantalBonusMiningRig *= 2;
             TxtAantalBonusMining.Content = $"x{aantalBonusMiningRig}";
             MiningMultiplier.Text = $"x{aantalBonusMiningRig}";
-            TxtPrijsBonusMining.Content = $"Cost: {Math.Ceiling(prijsBonusMiningRig)}";
+            TxtPrijsBonusMining.Content = $"Cost: {Math.Ceiling(prijsBonusMiningRig):# ##0}";
 
             passiefMiningRig *= 2;
 
@@ -612,7 +612,7 @@ namespace BitcoinMiner
             aantalBonusQuantum *= 2;
             TxtAantalBonusQuantum.Content = $"x{aantalBonusQuantum}";
             QuantumMultiplier.Text = $"x{aantalBonusQuantum}";
-            TxtPrijsBonusQuantum.Content = $"Cost: {Math.Ceiling(prijsBonusQuantum)}";
+            TxtPrijsBonusQuantum.Content = $"Cost: {Math.Ceiling(prijsBonusQuantum):# ##0}";
 
             passiefQuantum *= 2;
 
@@ -636,7 +636,7 @@ namespace BitcoinMiner
             aantalBonusClock *= 2;
             TxtAantalBonusClock.Content = $"x{aantalBonusClock}";
             ClockMultiplier.Text = $"x{aantalBonusClock}";
-            TxtPrijsBonusClock.Content = $"Cost: {Math.Ceiling(prijsBonusClock)}";
+            TxtPrijsBonusClock.Content = $"Cost: {Math.Ceiling(prijsBonusClock):# ##0}";
 
             passiefClock *= 2;
 
@@ -660,7 +660,7 @@ namespace BitcoinMiner
             aantalBonusCooler *= 2;
             TxtAantalBonusCooling.Content = $"x{aantalBonusCooler}";
             CoolingMultiplier.Text = $"x{aantalBonusCooler}";
-            TxtPrijsBonusCooling.Content = $"Cost: {Math.Ceiling(prijsBonusCooler)}";
+            TxtPrijsBonusCooling.Content = $"Cost: {Math.Ceiling(prijsBonusCooler):# ##0}";
             
 
             passiefClock *= 2;
@@ -685,7 +685,7 @@ namespace BitcoinMiner
             aantalBonusSecurity *= 2;
             TxtAantalBonusSecurity.Content = $"x{aantalBonusSecurity}";
             SecurityMultiplier.Text = $"x{aantalBonusSecurity}";
-            TxtPrijsBonusSecurity.Content = $"Cost: {Math.Ceiling(prijsBonusSecurity)}";
+            TxtPrijsBonusSecurity.Content = $"Cost: {Math.Ceiling(prijsBonusSecurity):# ##0}";
 
             passiefSecurity *= 2;
 
@@ -1443,65 +1443,65 @@ namespace BitcoinMiner
         {
             ToolTip TTbasic = new ToolTip();
             StringBuilder sbBasic = new StringBuilder();
-            sbBasic.AppendLine($"Every basic miner will provide a passive income of {passiefBasic/aantalBasic} BTC every second");
-            sbBasic.AppendLine($"Your basic miners currently provide {passiefBasic} BTC per second together");
+            sbBasic.AppendLine($"Every basic miner will provide a passive income of {passiefBasic/aantalBasic:# ##0.00} BTC every second");
+            sbBasic.AppendLine($"Your basic miners currently provide {passiefBasic:# ##0.00} BTC per second together");
             sbBasic.AppendLine($"Your basic miners currently have a multiplier of {aantalBonusBasic}");
-            sbBasic.AppendLine($"In total, your basic miners have earned {opbrengstBasicOoit} BTC so far");
+            sbBasic.AppendLine($"In total, your basic miners have earned {opbrengstBasicOoit:# ##0.00} BTC so far");
 
             TTbasic.Content = sbBasic.ToString();
             GridBasic.ToolTip = TTbasic;
 
             ToolTip TTadvanced = new ToolTip();
             StringBuilder sbAdvanced = new StringBuilder();
-            sbAdvanced.AppendLine($"Every advanced miner will provide a passive income of {passiefAdvanced / aantalAdvanced} BTC every second");
-            sbAdvanced.AppendLine($"Your advanced miners currently provide {passiefAdvanced} BTC per second together");
+            sbAdvanced.AppendLine($"Every advanced miner will provide a passive income of {passiefAdvanced / aantalAdvanced:# ##0.00} BTC every second");
+            sbAdvanced.AppendLine($"Your advanced miners currently provide {passiefAdvanced:# ##0.00} BTC per second together");
             sbAdvanced.AppendLine($"Your advanced miners currently have a multiplier of {aantalBonusAdvanced}");
-            sbAdvanced.AppendLine($"In total, your advanced miners have earned {opbrengstAdvancedOoit} BTC so far"); 
+            sbAdvanced.AppendLine($"In total, your advanced miners have earned {opbrengstAdvancedOoit:# ##0.00} BTC so far"); 
             TTadvanced.Content = sbAdvanced.ToString();
             GridAdvanced.ToolTip = TTadvanced;
 
             ToolTip TTminingRig = new ToolTip();
             StringBuilder sbMiningRig = new StringBuilder();
-            sbMiningRig.AppendLine($"Every Mining Rig will provide a passive income of {passiefMiningRig / aantalMiningRig} BTC every second");
-            sbMiningRig.AppendLine($"Your Mining Rigs currently provide {passiefMiningRig} BTC per second together");
+            sbMiningRig.AppendLine($"Every Mining Rig will provide a passive income of {passiefMiningRig / aantalMiningRig:# ##0.00} BTC every second");
+            sbMiningRig.AppendLine($"Your Mining Rigs currently provide {passiefMiningRig:# ##0.00} BTC per second together");
             sbMiningRig.AppendLine($"Your Mining Rigs currently have a multiplier of {aantalBonusMiningRig}");
-            sbMiningRig.AppendLine($"In total, your Mining Rigs have earned {opbrengstMiningRigOoit} BTC so far"); 
+            sbMiningRig.AppendLine($"In total, your Mining Rigs have earned {opbrengstMiningRigOoit:# ##0.00} BTC so far"); 
             TTminingRig.Content = sbMiningRig.ToString();
             GridMiningRig.ToolTip = sbMiningRig;
 
             ToolTip TTquantum = new ToolTip();
             StringBuilder sbQuantum = new StringBuilder();
-            sbQuantum.AppendLine($"Every Quantum Miner will provide a passive income of {passiefQuantum / aantalQuantum} BTC every second");
-            sbQuantum.AppendLine($"Your Quantum Miners currently provide {passiefQuantum} BTC per second together");
+            sbQuantum.AppendLine($"Every Quantum Miner will provide a passive income of {passiefQuantum / aantalQuantum:# ##0.00} BTC every second");
+            sbQuantum.AppendLine($"Your Quantum Miners currently provide {passiefQuantum:# ##0.00} BTC per second together");
             sbQuantum.AppendLine($"Your Quantum Miners currently have a multiplier of {aantalBonusQuantum}");
-            sbQuantum.AppendLine($"In total, your Quantum Miners have earned {opbrengstQuantumOoit} BTC so far"); 
+            sbQuantum.AppendLine($"In total, your Quantum Miners have earned {opbrengstQuantumOoit:# ##0.00} BTC so far"); 
             TTquantum.Content = sbQuantum.ToString();
             GridQuantum.ToolTip = sbQuantum;
 
             ToolTip TTclock = new ToolTip();
             StringBuilder sbClock = new StringBuilder();
-            sbClock.AppendLine($"Every Overclocking Module will provide a passive income of {passiefClock / aantalClock} BTC every second");
-            sbClock.AppendLine($"Your Overclocking Modules currently provide {passiefClock} BTC per second together");
+            sbClock.AppendLine($"Every Overclocking Module will provide a passive income of {passiefClock / aantalClock:# ##0.00} BTC every second");
+            sbClock.AppendLine($"Your Overclocking Modules currently provide {passiefClock:# ##0.00} BTC per second together");
             sbClock.AppendLine($"Your Overclocking Modules currently have a multiplier of {aantalBonusClock}");
-            sbClock.AppendLine($"In total, your Overclocking Modules have earned {opbrengstClockOoit} BTC so far"); 
+            sbClock.AppendLine($"In total, your Overclocking Modules have earned {opbrengstClockOoit:# ##0.00} BTC so far"); 
             TTclock.Content = sbClock.ToString();
             GridClock.ToolTip = sbClock;
 
             ToolTip TTcooler = new ToolTip();
             StringBuilder sbCooler = new StringBuilder();
-            sbCooler.AppendLine($"Every Cooling System will provide a passive income of {passiefCooler / aantalCooler} BTC every second");
-            sbCooler.AppendLine($"Your Cooling Systems currently provide {passiefCooler} BTC per second together");
+            sbCooler.AppendLine($"Every Cooling System will provide a passive income of {passiefCooler / aantalCooler:# ##0.00} BTC every second");
+            sbCooler.AppendLine($"Your Cooling Systems currently provide {passiefCooler:# ##0.00} BTC per second together");
             sbCooler.AppendLine($"Your Cooling Systems currently have a multiplier of {aantalBonusCooler}");
-            sbCooler.AppendLine($"In total, your Cooling Systems have earned {opbrengstCoolerOoit} BTC so far"); 
+            sbCooler.AppendLine($"In total, your Cooling Systems have earned {opbrengstCoolerOoit:# ##0.00} BTC so far"); 
             TTcooler.Content = sbCooler.ToString();
             GridCooling.ToolTip = sbCooler;
 
             ToolTip TTsecurity = new ToolTip();
             StringBuilder sbSecurity = new StringBuilder();
-            sbSecurity.AppendLine($"Every Security Protocol will provide a passive income of {passiefSecurity / aantalSecurity} BTC every second");
-            sbSecurity.AppendLine($"Your Security Protocols currently provide {passiefSecurity} BTC per second together");
+            sbSecurity.AppendLine($"Every Security Protocol will provide a passive income of {passiefSecurity / aantalSecurity:# ##0.00} BTC every second");
+            sbSecurity.AppendLine($"Your Security Protocols currently provide {passiefSecurity:# ##0.00} BTC per second together");
             sbSecurity.AppendLine($"Your Security Protocols currently have a multiplier of {aantalBonusSecurity}");
-            sbSecurity.AppendLine($"In total, your Security Protocols have earned {opbrengstSecurityOoit} BTC so far"); 
+            sbSecurity.AppendLine($"In total, your Security Protocols have earned {opbrengstSecurityOoit:# ##0.00} BTC so far"); 
             TTsecurity.Content = sbSecurity.ToString();
             GridSecurity.ToolTip = sbSecurity;
 
@@ -1525,8 +1525,8 @@ namespace BitcoinMiner
         private void StatsLoad()
         {
             StringBuilder sbStatistieken = new StringBuilder();
-            sbStatistieken.AppendLine($"Je hebt momenteel {aantalBTC} BTC");
-            sbStatistieken.AppendLine($"Je hebt tot nu toe {aantalBTCooit} BTC verzameld");
+            sbStatistieken.AppendLine($"Je hebt momenteel {aantalBTC:# ##0.00} BTC");
+            sbStatistieken.AppendLine($"Je hebt tot nu toe {aantalBTCooit:# ##0.00} BTC verzameld");
             sbStatistieken.AppendLine($"Speeltijd: {uren} uren, {minuten} minuten, {seconden} seconden");
             sbStatistieken.AppendLine($"Je hebt zelf {aantalBTCgeklikt} BTC gemined");
             sbStatistieken.AppendLine($"Je hebt {aantalGoldBTC} gouden BTC munten verzameld");
