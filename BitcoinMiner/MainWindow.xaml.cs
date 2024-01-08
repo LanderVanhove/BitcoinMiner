@@ -32,8 +32,8 @@ namespace BitcoinMiner
 
         #region Variabelen
 
-        double aantalBTC = 1000000;
-        double aantalBTCooit = 1000000;
+        double aantalBTC = 0;
+        double aantalBTCooit = 0;
         int aantalBTCgeklikt = 0;
 
 
